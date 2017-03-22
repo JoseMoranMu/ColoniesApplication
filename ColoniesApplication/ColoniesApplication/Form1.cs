@@ -16,5 +16,11 @@ namespace ColoniesApplication
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            String u = textBox1.Text;
+            String p = textBox1.Text;
+        }
     }
 }
