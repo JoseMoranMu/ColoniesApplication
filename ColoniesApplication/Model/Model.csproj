@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="ColoniesBD.cs" />
     <Compile Include="LoginBD.cs" />
+    <Compile Include="Personal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

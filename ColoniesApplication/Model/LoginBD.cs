@@ -8,22 +8,28 @@ using System.Data;
 
 namespace Model
 {
-    class LoginBD
+    public class LoginBD
     {
+        public LoginBD() {
+        }
         public static bool login(String user, String password)
         {
-            String p ="";
+            Personal p = null;
             bool b = false;
-            MySqlConnection sqlCon = new MySqlConnection("Server= localhost; Database= colonies;Uid=root;Pwd=;");
+            MySqlConnection sqlCon = new MySqlConnection("Server= localhost; Database= colonies;Uid=alumne;Pwd=alumne;");
             sqlCon.Open();
-            String query = "Select email from personal Where DNI="+user;
+            String query = "Select * from personal Where DNI like '"+user+"'";
             MySqlCommand mysqlCmd = new MySqlCommand(query, sqlCon);
             MySqlDataReader sqlReader = mysqlCmd.ExecuteReader();
             while (sqlReader.Read())
             {
-                p=(String)sqlReader.GetValue(0);
+                p = new Personal((String)sqlReader.GetValue(0),
+                    (String)sqlReader.GetValue(1),
+                    (String)sqlReader.GetValue(2),
+                    (String)sqlReader.GetValue(3),
+                    (String)sqlReader.GetValue(4));
             }
-            if (password == p) b = true;
+            if (password == p.getEmail()) b = true;
             else b = false;
             return b;
         }

@@ -19,9 +19,9 @@ namespace ColoniesApplication
 
         private void button1_Click(object sender, EventArgs e)
         {
-            String u = textBox1.Text;
+            String u = textBox2.Text;
             String p = textBox1.Text;
-            bool b= LoginBD.Login(u, p);
+            bool b= Model.LoginBD.login(u, p);
             if (b)
             {
                 MessageBox.Show("Login ok");
