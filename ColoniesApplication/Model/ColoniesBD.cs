@@ -8,5 +8,8 @@ namespace Model
 {
     public class ColoniesBD
     {
+        public ColoniesBD() {
+
+        }
     }
 }
