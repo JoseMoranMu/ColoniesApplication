@@ -21,6 +21,14 @@ namespace ColoniesApplication
         {
             String u = textBox1.Text;
             String p = textBox1.Text;
+            bool b= LoginBD.Login(u, p);
+            if (b)
+            {
+                MessageBox.Show("Login ok");
+            }
+            else {
+                MessageBox.Show("Login fail");
+            }
         }
     }
 }
