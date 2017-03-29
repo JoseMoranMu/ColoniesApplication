@@ -9,7 +9,7 @@ namespace Controlador
 {
     class ControladorAdmin
     {
-        ColoniesBD bd;
+        public ColoniesBD bd;
         public ControladorAdmin(ColoniesBD bd)
         {
             this.bd = bd;
