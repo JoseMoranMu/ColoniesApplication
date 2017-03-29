@@ -13,5 +13,21 @@ namespace Controlador
         public ControladorSuper(ColoniesBD bd) {
             this.bd = bd;
         }
+        public bool insertarAdmin(Personal p, String numSS) {
+            return true;
+        }
+        public bool modificarAdmin(Personal p, String numSS) {
+            return true;
+        }
+        public bool insertarMonitor(Personal p, String nacimiento) {
+            return true;
+        }
+        public bool borrarMonitor(Personal p, String nacimiento){
+            return true;
+        }
+        public bool insertatActividadCasa(String idActivitad, String idCasa, int nivel) {
+            return true;
+        }
+
     }
 }
