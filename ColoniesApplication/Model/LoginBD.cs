@@ -12,13 +12,13 @@ namespace Model
     {
         public LoginBD() {
         }
-        public static bool login(String user, String password)
+        public static Personal login(String user, String password)
         {
             Personal p = null;
             bool b = false;
             MySqlConnection sqlCon = new MySqlConnection("Server= localhost; Database= colonies;Uid=alumne;Pwd=alumne;");
             sqlCon.Open();
-            String query = "Select * from personal Where DNI like '"+user+"'";
+            String query = "Select p.*, a.titulacion from personal p, administrador a Where p.DNI=a.DNI AND p.DNI like '"+user+"'";
             MySqlCommand mysqlCmd = new MySqlCommand(query, sqlCon);
             MySqlDataReader sqlReader = mysqlCmd.ExecuteReader();
             while (sqlReader.Read())
@@ -27,11 +27,11 @@ namespace Model
                     (String)sqlReader.GetValue(1),
                     (String)sqlReader.GetValue(2),
                     (String)sqlReader.GetValue(3),
-                    (String)sqlReader.GetValue(4));
+                    (String)sqlReader.GetValue(4),
+                    (String)sqlReader.GetValue(5));
             }
-            if (password == p.getEmail()) b = true;
-            else b = false;
-            return b;
+            if (!(password == p.getEmail())) p = null;
+            return p;
         }
     }
 }
