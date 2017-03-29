@@ -21,7 +21,7 @@ namespace ColoniesApplication
         {
             String u = textBox2.Text;
             String p = textBox1.Text;
-            Model.Personal usuario= Model.LoginBD.login(u, p);
+            Model.Personal usuario= Model.ColoniesBD.login(u, p);
             if (usuario!=null)
             {
                 MessageBox.Show("Login ok ");
