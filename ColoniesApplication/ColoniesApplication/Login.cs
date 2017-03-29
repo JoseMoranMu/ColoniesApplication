@@ -7,27 +7,33 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Model;
 
 namespace ColoniesApplication
 {
-    public partial class Form1 : Form
+    public partial class Login : Form
     {
-        public Form1()
+        Colonias parent;
+        public Login(Colonias parent)
         {
             InitializeComponent();
+            this.MdiParent = parent;
+            this.parent = parent;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             String u = textBox2.Text;
             String p = textBox1.Text;
-            Model.Personal usuario= Model.ColoniesBD.login(u, p);
+            Personal usuario= ColoniesBD.login(u, p);
             if (usuario!=null)
             {
                 MessageBox.Show("Login ok ");
+                ColoniesBD db = new ColoniesBD();
                 if (usuario.getRole().Equals("Super"))
                 {
-
+                    new SuperForm(db, parent).Show();
+                    this.Close();
                 }
                 else if (usuario.getRole().Equals("Admin"))
                 {
