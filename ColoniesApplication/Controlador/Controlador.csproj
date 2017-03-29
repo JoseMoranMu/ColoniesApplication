@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ControladorAdmin.cs" />
+    <Compile Include="ControladorMonitor.cs" />
     <Compile Include="ControladorSuper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
