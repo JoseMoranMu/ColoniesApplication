@@ -21,10 +21,22 @@ namespace ColoniesApplication
         {
             String u = textBox2.Text;
             String p = textBox1.Text;
-            bool b= Model.LoginBD.login(u, p);
-            if (b)
+            Model.Personal usuario= Model.LoginBD.login(u, p);
+            if (usuario!=null)
             {
-                MessageBox.Show("Login ok");
+                MessageBox.Show("Login ok ");
+                if (usuario.getRole().Equals("Super"))
+                {
+
+                }
+                else if (usuario.getRole().Equals("Admin"))
+                {
+
+                }
+                else if (usuario.getRole().Equals("Monitor"))
+                {
+
+                }
             }
             else {
                 MessageBox.Show("Login fail");
