@@ -14,6 +14,7 @@ namespace Controlador
         {
             this.bd = bd;
         }
+        
         public bool insertatNens() {
             return true;
         }

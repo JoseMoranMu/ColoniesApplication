@@ -13,6 +13,9 @@ namespace Controlador
         public ControladorSuper(ColoniesBD bd) {
             this.bd = bd;
         }
+        public List<Personal> listarTodos() {
+            return bd.listarTodos();
+        }
         public bool insertarAdmin(Personal p, String numSS) {
             return true;
         }

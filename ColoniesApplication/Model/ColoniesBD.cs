@@ -32,6 +32,11 @@ namespace Model
             if (!(password == p.getEmail())) p = null;
             return p;
         }
+
+        public List<Personal> listarTodos()
+        {
+            
+        }
     }
     }
 

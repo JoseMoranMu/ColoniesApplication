@@ -32,7 +32,7 @@ namespace ColoniesApplication
                 ColoniesBD db = new ColoniesBD();
                 if (usuario.getRole().Equals("Super"))
                 {
-                    new SuperForm(db, parent).Show();
+                    new Super(db, parent).Show();
                     this.Close();
                 }
                 else if (usuario.getRole().Equals("Admin"))
