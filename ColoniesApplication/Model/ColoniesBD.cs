@@ -40,7 +40,7 @@ namespace Model
             bool b = false;
             MySqlConnection sqlCon = new MySqlConnection("Server= localhost; Database= colonies;Uid=alumne;Pwd=alumne;");
             sqlCon.Open();
-            String query = "Select * personal p";
+            String query = "Select * from personal ";
             MySqlCommand mysqlCmd = new MySqlCommand(query, sqlCon);
             MySqlDataReader sqlReader = mysqlCmd.ExecuteReader();
             while (sqlReader.Read())
@@ -94,9 +94,17 @@ namespace Model
             {                                
                 MySqlConnection sqlCon = new MySqlConnection("Server= localhost; Database= colonies;Uid=alumne;Pwd=alumne;");
                 sqlCon.Open();
+                
+                //insertar personal (dni, nombre, apellidos, teléfono, email)
                 String query = "Select p.*, a.titulacion from personal p, administrador a Where p.DNI=a.DNI AND p.DNI";
                 MySqlCommand mysqlCmd = new MySqlCommand(query, sqlCon);
                 MySqlDataReader sqlReader = mysqlCmd.ExecuteReader();
+
+                //insertar administrador (p.dni, numSS, p.role)
+                /*String query = "Select p.*, a.titulacion from personal p, administrador a Where p.DNI=a.DNI AND p.DNI";
+                MySqlCommand mysqlCmd = new MySqlCommand(query, sqlCon);
+                MySqlDataReader sqlReader = mysqlCmd.ExecuteReader();*/
+
                 flag = true;
                 sqlCon.Close();
             }
