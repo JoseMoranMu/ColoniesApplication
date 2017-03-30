@@ -94,16 +94,16 @@ namespace Model
             {                                
                 MySqlConnection sqlCon = new MySqlConnection("Server= localhost; Database= colonies;Uid=alumne;Pwd=alumne;");
                 sqlCon.Open();
-                
+
                 //insertar personal (dni, nombre, apellidos, teléfono, email)
-                String query = "Select p.*, a.titulacion from personal p, administrador a Where p.DNI=a.DNI AND p.DNI";
-                MySqlCommand mysqlCmd = new MySqlCommand(query, sqlCon);
-                MySqlDataReader sqlReader = mysqlCmd.ExecuteReader();
+                String query1 = "INSERT INTO personal VALUES (" + p.getDNI() + "," + p.getName() + "," + p.getLastName() + "," + p.getPhone() + "," + p.getEmail() + ")";
+                MySqlCommand mysqlCmd1 = new MySqlCommand(query1, sqlCon);
+                MySqlDataReader sqlReader1 = mysqlCmd1.ExecuteReader();
 
                 //insertar administrador (p.dni, numSS, p.role)
-                /*String query = "Select p.*, a.titulacion from personal p, administrador a Where p.DNI=a.DNI AND p.DNI";
-                MySqlCommand mysqlCmd = new MySqlCommand(query, sqlCon);
-                MySqlDataReader sqlReader = mysqlCmd.ExecuteReader();*/
+                String query2 = "INSERT INTO administrador VALUES (" + p.getDNI() + "," + numSS + "," + p.getRole()+")";
+                MySqlCommand mysqlCmd2 = new MySqlCommand(query2, sqlCon);
+                MySqlDataReader sqlReader2 = mysqlCmd2.ExecuteReader();
 
                 flag = true;
                 sqlCon.Close();
