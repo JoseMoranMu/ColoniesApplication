@@ -31,6 +31,5 @@ namespace Controlador
         public bool insertatActividadCasa(String idActivitad, String idCasa, int nivel) {
             return true;
         }
-
     }
 }
