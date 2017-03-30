@@ -35,12 +35,12 @@ namespace Model
 
         public List<Personal> listarTodos()
         {
-            List<Personal> lista = new List<Personal>();
+            List<Personal> listaTodos = new List<Personal>();
             Personal p = null;
             bool b = false;
             MySqlConnection sqlCon = new MySqlConnection("Server= localhost; Database= colonies;Uid=alumne;Pwd=alumne;");
             sqlCon.Open();
-            String query = "Select p.*, a.titulacion from personal p, administrador a Where p.DNI=a.DNI AND p.DNI";
+            String query = "Select * personal p";
             MySqlCommand mysqlCmd = new MySqlCommand(query, sqlCon);
             MySqlDataReader sqlReader = mysqlCmd.ExecuteReader();
             while (sqlReader.Read())
@@ -50,18 +50,44 @@ namespace Model
                     (String)sqlReader.GetValue(2),
                     (String)sqlReader.GetValue(3),
                     (String)sqlReader.GetValue(4),
-                    (String)sqlReader.GetValue(5));
+                    "monitor");
+                listaTodos.Add(p);
+            }
 
-                lista.Add(p);
-            }            
+            listaTodos = listarTodosRoles(listaTodos);
+            sqlCon.Close();
+            return listaTodos;
+        }
 
-            return lista;
+        public List<Personal> listarTodosRoles(List<Personal> listaTodos) {            
+            Personal p = null;
+            String DNI;
+            String titulacion;
+            MySqlConnection sqlCon = new MySqlConnection("Server= localhost; Database= colonies;Uid=alumne;Pwd=alumne;");
+            sqlCon.Open();
+            String query = "Select DNI,titulacion from administrador";
+            MySqlCommand mysqlCmd = new MySqlCommand(query, sqlCon);
+            MySqlDataReader sqlReader = mysqlCmd.ExecuteReader();
+            while (sqlReader.Read())
+            {
+                DNI = (String)sqlReader.GetValue(0);
+                titulacion = (String)sqlReader.GetValue(1);
+                for (int i = 0; i < listaTodos.Count; i++) {
+                    if (listaTodos[i].getDNI().Equals(DNI)) {
+                        listaTodos[i].setRole(titulacion);
+                    }
+                }
+            }
+
+
+            return listaTodos;
         }
 
         public bool insertarAdmin(Personal p, String numSS)
         {
             //insertar en la tabla "personal" el objeto p y en la tabla "administrador" el 
             //numSS y la titulacion("admin" en este caso)
+            //TODO query
             Boolean flag=false;            
             bool b = false;
             try
@@ -72,11 +98,12 @@ namespace Model
                 MySqlCommand mysqlCmd = new MySqlCommand(query, sqlCon);
                 MySqlDataReader sqlReader = mysqlCmd.ExecuteReader();
                 flag = true;
+                sqlCon.Close();
             }
             catch (MySqlException)
             {
                 flag = false;
-            }
+            }            
             return flag;
         }
 
