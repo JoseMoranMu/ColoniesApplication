@@ -38,27 +38,7 @@ namespace Model
             sqlCon.Close();
             sqlReader.Close();
             return p;
-        }
-
-        public bool modificarInscripcion(int carnet_ninio, DateTime fecha_inicio, string nombre_casa, int numero_inscripcion)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool insertarInscripcion(int carnet_ninio, DateTime fecha_inicio, string nombre_casa, int numero_inscripcion)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool modificarNen(Ninio n)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool insertatNens(Ninio n)
-        {
-            throw new NotImplementedException();
-        }
+        }       
 
         private Personal getRole(Personal p)
         {
@@ -247,6 +227,34 @@ namespace Model
             }
 
             return flag;
+        }
+
+        /// <summary>
+        /// METODOS CONTROLADOR ADMIN
+        /// </summary>
+        /// <param name="carnet_ninio"></param>
+        /// <param name="fecha_inicio"></param>
+        /// <param name="nombre_casa"></param>
+        /// <param name="numero_inscripcion"></param>
+        /// <returns></returns>
+        public bool modificarInscripcion(int carnet_ninio, DateTime fecha_inicio, string nombre_casa, int numero_inscripcion)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool insertarInscripcion(int carnet_ninio, DateTime fecha_inicio, string nombre_casa, int numero_inscripcion)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool modificarNen(Ninio n)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool insertatNens(Ninio n)
+        {
+            throw new NotImplementedException();
         }
 
 
