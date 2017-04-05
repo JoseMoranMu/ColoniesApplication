@@ -10,22 +10,23 @@ namespace Controlador
     class ControladorAdmin
     {
         public ColoniesBD bd;
-        public ControladorAdmin(ColoniesBD bd)
+        public ControladorAdmin()
         {
-            this.bd = bd;
+            bd = new ColoniesBD();            
         }
         
-        public bool insertatNens() {
-            return true;
+        public bool insertatNens(Ninio n) {
+            return bd.insertatNens(n);
         }
-        public bool modificarNen() {
-            return true;
+        public bool modificarNen(Ninio n) {
+            return bd.modificarNen(n);
         }
-        public bool insertarInscripcion() {
-            return true;
+        public bool insertarInscripcion(int carnet_ninio, DateTime fecha_inicio, String nombre_casa, int numero_inscripcion) {
+            return bd.insertarInscripcion(carnet_ninio, fecha_inicio, nombre_casa, numero_inscripcion);
         }
-        public bool modificarInscripcion(){
-            return true;
+        public bool modificarInscripcion(int carnet_ninio, DateTime fecha_inicio, String nombre_casa, int numero_inscripcion)
+        {
+            return bd.modificarInscripcion(carnet_ninio, fecha_inicio, nombre_casa, numero_inscripcion);
         }
     }
 }

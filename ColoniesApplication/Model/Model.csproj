@@ -48,6 +48,7 @@
     <Compile Include="Administrador.cs" />
     <Compile Include="ColoniesBD.cs" />
     <Compile Include="Monitor.cs" />
+    <Compile Include="Ninio.cs" />
     <Compile Include="Personal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

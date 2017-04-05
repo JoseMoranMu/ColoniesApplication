@@ -35,8 +35,30 @@ namespace Model
                 p = getRole(p);
 
             }
+            sqlCon.Close();
+            sqlReader.Close();
             return p;
-        }               
+        }
+
+        public bool modificarInscripcion(int carnet_ninio, DateTime fecha_inicio, string nombre_casa, int numero_inscripcion)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool insertarInscripcion(int carnet_ninio, DateTime fecha_inicio, string nombre_casa, int numero_inscripcion)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool modificarNen(Ninio n)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool insertatNens(Ninio n)
+        {
+            throw new NotImplementedException();
+        }
 
         private Personal getRole(Personal p)
         {
@@ -65,6 +87,8 @@ namespace Model
                     p.getPhone(),
                     p.getEmail(), (DateTime)sqlReader.GetValue(1));
             }
+            sqlCon.Close();
+            sqlReader.Close();
             return r;
         }
 
@@ -93,6 +117,7 @@ namespace Model
                 listaTodos.Add(p);
             }
             sqlCon.Close();
+            sqlReader.Close();
             return listaTodos;
         }
 
@@ -118,6 +143,8 @@ namespace Model
                 MySqlCommand mysqlCmd2 = new MySqlCommand(query2, sqlCon);
                 MySqlDataReader sqlReader2 = mysqlCmd2.ExecuteReader();
 
+                sqlReader1.Close();
+                sqlReader2.Close();
                 flag = true;
                 sqlCon.Close();
             }
@@ -139,12 +166,14 @@ namespace Model
                 String query1 = "UPDATE personal SET nombre=" + a.getName() + ", apellidos=" + a.getLastName() + ", teléfono=" + a.getPhone() + ", email=" + a.getEmail() + "WHERE DNI=" + a.getDNI() /*+ ";"*/;
                 MySqlCommand mysqlCmd1 = new MySqlCommand(query1, sqlCon);
                 MySqlDataReader sqlReader1 = mysqlCmd1.ExecuteReader();
-
+                
                 //update tabla administrador
                 String query2 = "UPDATE administrador SET num_SS=" + a.getNSS() + ", titulacion=" + a.getTitulacion() + "WHERE DNI=" + a.getDNI() /*+ ";"*/;
                 MySqlCommand mysqlCmd2 = new MySqlCommand(query2, sqlCon);
                 MySqlDataReader sqlReader2 = mysqlCmd2.ExecuteReader();
 
+                sqlReader1.Close();
+                sqlReader2.Close();
                 flag = true;
                 sqlCon.Close();
             }
@@ -167,11 +196,12 @@ namespace Model
                 MySqlCommand mysqlCmd1 = new MySqlCommand(query1, sqlCon);
                 MySqlDataReader sqlReader1 = mysqlCmd1.ExecuteReader();
                 flag = true;
+                sqlReader1.Close();
+                sqlCon.Close();
             }
             catch (MySqlException) {
                 flag = false;
-            }
-
+            }            
             return flag;
         }
 
@@ -186,6 +216,30 @@ namespace Model
                 MySqlCommand mysqlCmd1 = new MySqlCommand(query1, sqlCon);
                 MySqlDataReader sqlReader1 = mysqlCmd1.ExecuteReader();
                 flag = true;
+                sqlReader1.Close();
+                sqlCon.Close();
+            }
+            catch (MySqlException)
+            {
+                flag = false;
+            }
+
+            return flag;
+        }
+
+        public bool insertarActividadCasa(Actividad a)
+        {
+            Boolean flag = false;
+            try
+            {
+                MySqlConnection sqlCon = new MySqlConnection("Server= localhost; Database= colonies;Uid=alumne;Pwd=alumne;");
+                sqlCon.Open();
+                String query1 = "INSERT INTO actividad VALUES (" + a.getCodigo() + ", " + a.getDescripcion() + ")";
+                MySqlCommand mysqlCmd1 = new MySqlCommand(query1, sqlCon);
+                MySqlDataReader sqlReader1 = mysqlCmd1.ExecuteReader();
+                flag = true;
+                sqlReader1.Close();
+                sqlCon.Close();
             }
             catch (MySqlException)
             {

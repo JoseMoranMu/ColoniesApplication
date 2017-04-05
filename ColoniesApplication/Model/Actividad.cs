@@ -8,23 +8,37 @@ namespace Model
 {
     public class Actividad
     {
-        private String idActividad;
-        private String idCasa;
-        int nivel;
+        String codigo;
+        String descripcion;
 
-        public Actividad (String idActividad, String idCasa, int nivel)
+        public Actividad()
         {
-            this.idActividad = idActividad;
-            this.idCasa = idCasa;
-            this.nivel = nivel;
         }
 
-        public string getIdActividad()
+        public Actividad(String codigo, String descripcion)
         {
-            return idActividad;
+            this.codigo = codigo;
+            this.descripcion = descripcion;
         }
 
-        //public string 
+        public String getCodigo()
+        {
+            return codigo;
+        }
 
+        public void setCodigo(String codigo)
+        {
+            this.codigo = codigo;
+        }
+
+        public String getDescripcion()
+        {
+            return descripcion;
+        }
+
+        public void setDescripcion(String descripcion)
+        {
+            this.descripcion = descripcion;
+        }
     }
 }

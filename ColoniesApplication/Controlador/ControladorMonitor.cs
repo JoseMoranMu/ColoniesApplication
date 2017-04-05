@@ -10,9 +10,9 @@ namespace Controlador
     public class ControladorMonitor
     {
         ColoniesBD bd;
-        public ControladorMonitor(ColoniesBD bd)
-        {
-            this.bd = bd;
+        public ControladorMonitor()
+        {            
+            bd = new ColoniesBD();
         }
         public bool registarTascaTanda() {
             return true;

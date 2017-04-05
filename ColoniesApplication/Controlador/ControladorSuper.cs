@@ -10,8 +10,8 @@ namespace Controlador
     public class ControladorSuper
     {
         ColoniesBD bd;
-        public ControladorSuper(ColoniesBD bd) {
-            this.bd = bd;
+        public ControladorSuper() {
+            bd = new ColoniesBD();
         }
         public List<Personal> listarTodos() {
             return bd.listarTodos();
@@ -28,8 +28,8 @@ namespace Controlador
         public bool borrarMonitor(Monitor m){
             return bd.borrarMonitor(m);
         }
-        public bool insertarActividadCasa(String idActivitad, String idCasa, int nivel) {
-            return true/*insertarActividadCasa(*/;
+        public bool insertarActividadCasa(Actividad a) {
+            return bd.insertarActividadCasa(a);
         }
     }
 }
