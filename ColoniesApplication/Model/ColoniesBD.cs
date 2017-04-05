@@ -36,7 +36,7 @@ namespace Model
 
             }
             return p;
-        }
+        }               
 
         private Personal getRole(Personal p)
         {
@@ -67,6 +67,11 @@ namespace Model
             }
             return r;
         }
+
+        /// <summary>
+        /// METODOS CONTROLADOR SUPER
+        /// </summary>
+        /// <returns></returns>
         public List<Personal> listarTodos()
         {
             List<Personal> listaTodos = new List<Personal>();
@@ -83,41 +88,15 @@ namespace Model
                     (String)sqlReader.GetValue(1),
                     (String)sqlReader.GetValue(2),
                     (String)sqlReader.GetValue(3),
-                    (String)sqlReader.GetValue(4),
-                    "monitor");
+                    (String)sqlReader.GetValue(4));
+                p = getRole(p);
                 listaTodos.Add(p);
             }
-
-            listaTodos = listarTodosRoles(listaTodos);
             sqlCon.Close();
             return listaTodos;
         }
 
-        public List<Personal> listarTodosRoles(List<Personal> listaTodos) {            
-            Personal p = null;
-            String DNI;
-            String titulacion;
-            MySqlConnection sqlCon = new MySqlConnection("Server= localhost; Database= colonies;Uid=alumne;Pwd=alumne;");
-            sqlCon.Open();
-            String query = "Select DNI,titulacion from administrador";
-            MySqlCommand mysqlCmd = new MySqlCommand(query, sqlCon);
-            MySqlDataReader sqlReader = mysqlCmd.ExecuteReader();
-            while (sqlReader.Read())
-            {
-                DNI = (String)sqlReader.GetValue(0);
-                titulacion = (String)sqlReader.GetValue(1);
-                for (int i = 0; i < listaTodos.Count; i++) {
-                    if (listaTodos[i].getDNI().Equals(DNI)) {
-                        listaTodos[i].setRole(titulacion);
-                    }
-                }
-            }
-
-
-            return listaTodos;
-        }
-
-        public bool insertarAdmin(Personal p, String numSS)
+        public bool insertarAdmin(Administrador a)
         {
             //insertar en la tabla "personal" el objeto p y en la tabla "administrador" el 
             //numSS y la titulacion("admin" en este caso)
@@ -130,12 +109,12 @@ namespace Model
                 sqlCon.Open();
 
                 //insertar personal (dni, nombre, apellidos, teléfono, email)
-                String query1 = "INSERT INTO personal VALUES (" + p.getDNI() + "," + p.getName() + "," + p.getLastName() + "," + p.getPhone() + "," + p.getEmail() + ")";
+                String query1 = "INSERT INTO personal VALUES (" + a.getDNI() + "," + a.getName() + "," + a.getLastName() + "," + a.getPhone() + "," + a.getEmail() + ")";
                 MySqlCommand mysqlCmd1 = new MySqlCommand(query1, sqlCon);
                 MySqlDataReader sqlReader1 = mysqlCmd1.ExecuteReader();
 
                 //insertar administrador (p.dni, numSS, p.role)
-                String query2 = "INSERT INTO administrador VALUES (" + p.getDNI() + "," + numSS + "," + p.getRole()+")";
+                String query2 = "INSERT INTO administrador VALUES (" + a.getDNI() + "," + a.getNSS() + "," + a.getTitulacion()+")";
                 MySqlCommand mysqlCmd2 = new MySqlCommand(query2, sqlCon);
                 MySqlDataReader sqlReader2 = mysqlCmd2.ExecuteReader();
 
@@ -149,7 +128,74 @@ namespace Model
             return flag;
         }
 
+        public bool modificarAdmin(Administrador a)
+        {
+            Boolean flag = false;
+            try
+            {
+                //udpate tabla personal
+                MySqlConnection sqlCon = new MySqlConnection("Server= localhost; Database= colonies;Uid=alumne;Pwd=alumne;");
+                sqlCon.Open();
+                String query1 = "UPDATE personal SET nombre=" + a.getName() + ", apellidos=" + a.getLastName() + ", teléfono=" + a.getPhone() + ", email=" + a.getEmail() + "WHERE DNI=" + a.getDNI() /*+ ";"*/;
+                MySqlCommand mysqlCmd1 = new MySqlCommand(query1, sqlCon);
+                MySqlDataReader sqlReader1 = mysqlCmd1.ExecuteReader();
+
+                //update tabla administrador
+                String query2 = "UPDATE administrador SET num_SS=" + a.getNSS() + ", titulacion=" + a.getTitulacion() + "WHERE DNI=" + a.getDNI() /*+ ";"*/;
+                MySqlCommand mysqlCmd2 = new MySqlCommand(query2, sqlCon);
+                MySqlDataReader sqlReader2 = mysqlCmd2.ExecuteReader();
+
+                flag = true;
+                sqlCon.Close();
+            }
+            catch (MySqlException)
+            {
+                flag = false;
+            }
+
+            return flag;
+        }
+
+        public bool borrarMonitor(Monitor m)
+        {
+            Boolean flag=false;
+            try
+            {
+                MySqlConnection sqlCon = new MySqlConnection("Server= localhost; Database= colonies;Uid=alumne;Pwd=alumne;");
+                sqlCon.Open();
+                String query1 = "DELETE FROM monitor WHERE DNI=" + m.getDNI() /*+ ";"*/;
+                MySqlCommand mysqlCmd1 = new MySqlCommand(query1, sqlCon);
+                MySqlDataReader sqlReader1 = mysqlCmd1.ExecuteReader();
+                flag = true;
+            }
+            catch (MySqlException) {
+                flag = false;
+            }
+
+            return flag;
+        }
+
+        public bool insertarMonitor(Monitor m)
+        {
+            Boolean flag = false;
+            try
+            {
+                MySqlConnection sqlCon = new MySqlConnection("Server= localhost; Database= colonies;Uid=alumne;Pwd=alumne;");
+                sqlCon.Open(); 
+                 String query1 = "INSERT INTO monitor VALUES (" + m.getDNI() + ", "+ m.getFechaNacimiento() + ")";
+                MySqlCommand mysqlCmd1 = new MySqlCommand(query1, sqlCon);
+                MySqlDataReader sqlReader1 = mysqlCmd1.ExecuteReader();
+                flag = true;
+            }
+            catch (MySqlException)
+            {
+                flag = false;
+            }
+
+            return flag;
+        }
+
 
     }
-    }
+}
 

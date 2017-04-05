@@ -16,20 +16,20 @@ namespace Controlador
         public List<Personal> listarTodos() {
             return bd.listarTodos();
         }
-        public bool insertarAdmin(Personal p, String numSS) {
-            return true;
+        public bool insertarAdmin(Administrador a) {
+            return bd.insertarAdmin(a);
         }
-        public bool modificarAdmin(Personal p, String numSS) {
-            return true;
+        public bool modificarAdmin(Administrador a) {
+            return bd.modificarAdmin(a);
         }
-        public bool insertarMonitor(Personal p, String nacimiento) {
-            return true;
+        public bool insertarMonitor(Monitor m) {
+            return bd.insertarMonitor(m);
         }
-        public bool borrarMonitor(Personal p, String nacimiento){
-            return true;
+        public bool borrarMonitor(Monitor m){
+            return bd.borrarMonitor(m);
         }
-        public bool insertatActividadCasa(String idActivitad, String idCasa, int nivel) {
-            return true;
+        public bool insertarActividadCasa(String idActivitad, String idCasa, int nivel) {
+            return true/*insertarActividadCasa(*/;
         }
     }
 }

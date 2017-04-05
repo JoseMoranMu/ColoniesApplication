@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actividad.cs" />
     <Compile Include="Administrador.cs" />
     <Compile Include="ColoniesBD.cs" />
     <Compile Include="Monitor.cs" />
