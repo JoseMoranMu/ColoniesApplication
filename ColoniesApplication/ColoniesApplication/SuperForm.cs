@@ -14,11 +14,14 @@ namespace ColoniesApplication
 {
     public partial class Super : Form
     {
+        Administrador a;
+        Monitor m;
         ControladorSuper cs;
         Colonias parent;
-        public Super(ColoniesBD bd, Colonias parent)
+        public Super(Colonias parent)
         {
-            cs = new ControladorSuper(bd);
+            ColoniesBD bd = new ColoniesBD();
+            cs = new ControladorSuper();
             InitializeComponent();
             this.parent = parent;
             this.MdiParent = parent;
@@ -37,7 +40,13 @@ namespace ColoniesApplication
               lVI.SubItems.Add(list[i].getLastName());
                lVI.SubItems.Add(list[i].getPhone());
                lVI.SubItems.Add(list[i].getEmail());
-                lVI.SubItems.Add(list[i].getRole());
+                if (list[i] is Administrador)
+                {
+                    lVI.SubItems.Add(((Administrador)list[i]).getTitulacion());
+                }
+                else {
+                    lVI.SubItems.Add("Monitor");
+                }
            }
         }
 
@@ -45,10 +54,12 @@ namespace ColoniesApplication
         {
             SuperAddAdmin add = new SuperAddAdmin();
             if (add.ShowDialog() == DialogResult.OK) {
-                Personal p = add.getPersonal();
-                add.Close();
-                cs.insertarAdmin(p,"Admin");
+
             }
+            listar();
+        }
+        public void setAdministrador(Administrador a) {
+            this.a = a;
         }
     }
 }

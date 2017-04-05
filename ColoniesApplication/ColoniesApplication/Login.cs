@@ -19,6 +19,8 @@ namespace ColoniesApplication
             InitializeComponent();
             this.MdiParent = parent;
             this.parent = parent;
+            textBox2.Text = "72621359D";
+            textBox1.Text = "sadmin@colonias.com";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -34,7 +36,7 @@ namespace ColoniesApplication
                     Administrador a = (Administrador)usuario;
                     if (a.getTitulacion().Equals("Super"))
                     {
-                        new Super(db, parent).Show();
+                        new Super(parent).Show();
                         this.Close();
                     }
                     else if (a.getTitulacion().Equals("Admin")) {
