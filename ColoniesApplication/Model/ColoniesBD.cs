@@ -11,13 +11,13 @@ namespace Model
     {
         public ColoniesBD() {
         }
-        public static Personal login(String user, String password)
+        public Personal login(String user, String password)
         {
             Personal p = null;
             bool b = false;
             MySqlConnection sqlCon = new MySqlConnection("Server= localhost; Database= colonies;Uid=alumne;Pwd=alumne;");
             sqlCon.Open();
-            String query = "Select p.*, a.titulacion from personal p, administrador a Where p.DNI=a.DNI AND p.DNI like '" + user + "'";
+            String query = "Select * from personal Where DNI like '" + user + "'";
             MySqlCommand mysqlCmd = new MySqlCommand(query, sqlCon);
             MySqlDataReader sqlReader = mysqlCmd.ExecuteReader();
             while (sqlReader.Read())
@@ -26,13 +26,47 @@ namespace Model
                     (String)sqlReader.GetValue(1),
                     (String)sqlReader.GetValue(2),
                     (String)sqlReader.GetValue(3),
-                    (String)sqlReader.GetValue(4),
-                    (String)sqlReader.GetValue(5));
+                    (String)sqlReader.GetValue(4));
             }
-            if (!(password == p.getEmail())) p = null;
+            if (!(password == p.getEmail()))
+            {
+                p = null;
+            }else {
+                p = getRole(p);
+
+            }
             return p;
         }
 
+        private Personal getRole(Personal p)
+        {
+            Personal r = null;
+            MySqlConnection sqlCon = new MySqlConnection("Server= localhost; Database= colonies;Uid=alumne;Pwd=alumne;");
+            sqlCon.Open();
+            String query = "Select * from Administrador Where DNI like '" + p.getDNI() + "'";
+            MySqlCommand mysqlCmd = new MySqlCommand(query, sqlCon);
+            MySqlDataReader sqlReader = mysqlCmd.ExecuteReader();
+            while (sqlReader.Read())
+            {
+                r = new Administrador(p.getDNI(),
+                    p.getName(),
+                    p.getLastName(),
+                    p.getPhone(),
+                    p.getEmail(), (int)sqlReader.GetValue(1), (String)sqlReader.GetValue(2));
+            }
+            query = "Select * from Monitor Where DNI like '" + p.getDNI() + "'";
+            mysqlCmd = new MySqlCommand(query, sqlCon);
+            sqlReader = mysqlCmd.ExecuteReader();
+            while (sqlReader.Read())
+            {
+                r = new Monitor(p.getDNI(),
+                    p.getName(),
+                    p.getLastName(),
+                    p.getPhone(),
+                    p.getEmail(), (DateTime)sqlReader.GetValue(1));
+            }
+            return r;
+        }
         public List<Personal> listarTodos()
         {
             List<Personal> listaTodos = new List<Personal>();

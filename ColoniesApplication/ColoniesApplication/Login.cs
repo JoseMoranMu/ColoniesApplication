@@ -23,24 +23,26 @@ namespace ColoniesApplication
 
         private void button1_Click(object sender, EventArgs e)
         {
+            ColoniesBD db = new ColoniesBD();
             String u = textBox2.Text;
             String p = textBox1.Text;
-            Personal usuario= ColoniesBD.login(u, p);
+            Personal usuario= db.login(u, p);
             if (usuario!=null)
-            {
+            { 
                 MessageBox.Show("Login ok ");
-                ColoniesBD db = new ColoniesBD();
-                if (usuario.getRole().Equals("Super"))
-                {
-                    new Super(db, parent).Show();
-                    this.Close();
-                }
-                else if (usuario.getRole().Equals("Admin"))
-                {
+                if(usuario is Administrador){
+                    Administrador a = (Administrador)usuario;
+                    if (a.getTitulacion().Equals("Super"))
+                    {
+                        new Super(db, parent).Show();
+                        this.Close();
+                    }
+                    else if (a.getTitulacion().Equals("Admin")) {
 
+
+                    }
                 }
-                else if (usuario.getRole().Equals("Monitor"))
-                {
+                else if(usuario is Monitor){
 
                 }
             }
