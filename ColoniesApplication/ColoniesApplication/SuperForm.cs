@@ -18,7 +18,6 @@ namespace ColoniesApplication
         Colonias parent;
         public Super(Colonias parent)
         {
-            ColoniesBD bd = new ColoniesBD();
             cs = new ControladorSuper();
             InitializeComponent();
             this.parent = parent;

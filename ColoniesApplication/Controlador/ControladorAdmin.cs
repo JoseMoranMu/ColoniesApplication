@@ -7,7 +7,7 @@ using Model;
 
 namespace Controlador
 {
-    class ControladorAdmin
+    public class ControladorAdmin
     {
         public ColoniesBD bd;
         public ControladorAdmin()
