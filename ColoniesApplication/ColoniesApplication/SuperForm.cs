@@ -70,22 +70,38 @@ namespace ColoniesApplication
 
         private void añadirToolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            SuperAddMonitor add = new SuperAddMonitor();
+            if (add.ShowDialog() == DialogResult.OK)
+            {
 
+            }
+            listar();
         }
 
         private void eliminarToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            SuperDeleteMonitor delete = new SuperDeleteMonitor();
+            if (delete.ShowDialog() == DialogResult.OK)
+            {
 
+            }
+            listar();
         }
 
         private void añadirToolStripMenuItem2_Click(object sender, EventArgs e)
         {
+            SuperAddActividad add = new SuperAddActividad();
+            if (add.ShowDialog() == DialogResult.OK)
+            {
 
+            }
+            listar();
         }
 
-        private void Super_Load(object sender, EventArgs e)
+        private void close(object sender, FormClosedEventArgs e)
         {
-
+            Login login = new Login(parent);
+            login.Show();
         }
     }
 }

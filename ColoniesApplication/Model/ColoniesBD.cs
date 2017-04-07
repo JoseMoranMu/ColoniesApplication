@@ -7,6 +7,16 @@ using MySql.Data.MySqlClient;
 
 namespace Model
 {
+    /**A TENER EN CUENTA EN TODAS LAS QUERYS:
+     * 
+     * Fijate que las querys que se utilizasn en Login y en getRole
+     * cuando vamos a concatenar un valor para añadirlo a la query, si ese
+     * valor es un string se abren unas comillas simples que luego hay que cerrar
+     * he estado haciendo unas pruebas y ninguna query me funciona, es posible que sea 
+     * por eso, añade las comillas simples y pruebalo, en principio a parte
+     * de la vista de Super ya esta terminada
+     * 
+     * */
     public class ColoniesBD
     {
         public ColoniesBD() {
@@ -58,6 +68,7 @@ namespace Model
             }
             query = "Select * from Monitor Where DNI like '" + p.getDNI() + "'";
             mysqlCmd = new MySqlCommand(query, sqlCon);
+            sqlReader.Close();
             sqlReader = mysqlCmd.ExecuteReader();
             while (sqlReader.Read())
             {

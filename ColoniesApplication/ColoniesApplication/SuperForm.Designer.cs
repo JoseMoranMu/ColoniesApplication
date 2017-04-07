@@ -116,7 +116,7 @@
             // añadirToolStripMenuItem2
             // 
             this.añadirToolStripMenuItem2.Name = "añadirToolStripMenuItem2";
-            this.añadirToolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
+            this.añadirToolStripMenuItem2.Size = new System.Drawing.Size(109, 22);
             this.añadirToolStripMenuItem2.Text = "Añadir";
             this.añadirToolStripMenuItem2.Click += new System.EventHandler(this.añadirToolStripMenuItem2_Click);
             // 
@@ -177,7 +177,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Super";
             this.Text = "SuperForm";
-            this.Load += new System.EventHandler(this.Super_Load);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.close);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
