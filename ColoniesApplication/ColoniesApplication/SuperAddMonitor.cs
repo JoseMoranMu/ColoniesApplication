@@ -7,25 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Model;
 using Controlador;
+using Model;
 
 namespace ColoniesApplication
 {
-    public partial class SuperAddAdmin : Form
+    public partial class SuperAddMonitor : Form
     {
-        Administrador a;
+        Monitor m;
         ControladorSuper cs;
-        public SuperAddAdmin()
+        public SuperAddMonitor()
         {
+            m = null;
             cs = new ControladorSuper();
-            a = null;
             InitializeComponent();
-        }
-
-        internal Personal getPersonal()
-        {
-            throw new NotImplementedException();
+           
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -35,15 +31,17 @@ namespace ColoniesApplication
             String apellido = textBox3.Text;
             String telefono = textBox4.Text;
             String email = textBox5.Text;
-            int nSS = int.Parse(textBox6.Text);
-            String titulacion = textBox7.Text;
-            a = new Administrador(dni,nombre,apellido,telefono,email,nSS,titulacion);
+            DateTime naixement = dateTimePicker1.Value.Date;
+            m = new Monitor(dni, nombre, apellido, telefono, email, naixement);
 
-            if (cs.insertarAdmin(a)) {
-                MessageBox.Show("Administrador añadido");
+            if (cs.insertarMonitor(m))
+            {
+                MessageBox.Show("Monitor añadido");
                 this.Close();
-            } else {
-                MessageBox.Show("Administrador no añadido");
+            }
+            else
+            {
+                MessageBox.Show("Monitor no modificado");
             }
         }
     }

@@ -80,6 +80,7 @@
             this.modificarToolStripMenuItem.Name = "modificarToolStripMenuItem";
             this.modificarToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.modificarToolStripMenuItem.Text = "Modificar";
+            this.modificarToolStripMenuItem.Click += new System.EventHandler(this.modificarToolStripMenuItem_Click);
             // 
             // monitorToolStripMenuItem
             // 
@@ -95,12 +96,14 @@
             this.añadirToolStripMenuItem1.Name = "añadirToolStripMenuItem1";
             this.añadirToolStripMenuItem1.Size = new System.Drawing.Size(117, 22);
             this.añadirToolStripMenuItem1.Text = "Añadir";
+            this.añadirToolStripMenuItem1.Click += new System.EventHandler(this.añadirToolStripMenuItem1_Click);
             // 
             // eliminarToolStripMenuItem
             // 
             this.eliminarToolStripMenuItem.Name = "eliminarToolStripMenuItem";
             this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.eliminarToolStripMenuItem.Text = "Eliminar";
+            this.eliminarToolStripMenuItem.Click += new System.EventHandler(this.eliminarToolStripMenuItem_Click);
             // 
             // tareasToolStripMenuItem
             // 
@@ -113,8 +116,9 @@
             // añadirToolStripMenuItem2
             // 
             this.añadirToolStripMenuItem2.Name = "añadirToolStripMenuItem2";
-            this.añadirToolStripMenuItem2.Size = new System.Drawing.Size(109, 22);
+            this.añadirToolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
             this.añadirToolStripMenuItem2.Text = "Añadir";
+            this.añadirToolStripMenuItem2.Click += new System.EventHandler(this.añadirToolStripMenuItem2_Click);
             // 
             // listView1
             // 
@@ -173,6 +177,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Super";
             this.Text = "SuperForm";
+            this.Load += new System.EventHandler(this.Super_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

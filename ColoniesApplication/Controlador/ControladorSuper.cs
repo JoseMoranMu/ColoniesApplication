@@ -25,11 +25,11 @@ namespace Controlador
         public bool insertarMonitor(Monitor m) {
             return bd.insertarMonitor(m);
         }
-        public bool borrarMonitor(Monitor m){
-            return bd.borrarMonitor(m);
+        public bool borrarMonitor(String dni){
+            return bd.borrarMonitor(dni);
         }
-        public bool insertarActividadCasa(Actividad a) {
-            return bd.insertarActividadCasa(a);
+        public bool insertarActividadCasa(Actividad a, String casa, int nivel) {
+            return bd.insertarActividadCasa(a,casa,nivel);
         }
     }
 }

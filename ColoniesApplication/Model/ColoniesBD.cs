@@ -165,14 +165,14 @@ namespace Model
             return flag;
         }
 
-        public bool borrarMonitor(Monitor m)
+        public bool borrarMonitor(String  dni)
         {
             Boolean flag=false;
             try
             {
                 MySqlConnection sqlCon = new MySqlConnection("Server= localhost; Database= colonies;Uid=alumne;Pwd=alumne;");
                 sqlCon.Open();
-                String query1 = "DELETE FROM monitor WHERE DNI=" + m.getDNI() /*+ ";"*/;
+                String query1 = "DELETE FROM monitor WHERE DNI=" + dni /*+ ";"*/;
                 MySqlCommand mysqlCmd1 = new MySqlCommand(query1, sqlCon);
                 MySqlDataReader sqlReader1 = mysqlCmd1.ExecuteReader();
                 flag = true;
@@ -207,8 +207,18 @@ namespace Model
             return flag;
         }
 
-        public bool insertarActividadCasa(Actividad a)
+        public bool insertarActividadCasa(Actividad a, String casa, int nivel)
         {
+            /**
+             * JOSE:
+             * Aparte de añadir actividad en la tabla actividad es 
+             * necesario añadir tmb la actividad en la tabla actividad_casa
+             * por lo que este metodo tmb pillara por parametro, 
+             * el codigo de casa (String)
+             * y el nivel que tiene (int)
+             * para que se pueda añadir a esa tabla
+             * te dejo preparado los parametros en la funcion
+             * */
             Boolean flag = false;
             try
             {

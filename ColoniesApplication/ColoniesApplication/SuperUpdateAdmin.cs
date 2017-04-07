@@ -9,23 +9,17 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Model;
 using Controlador;
-
 namespace ColoniesApplication
 {
-    public partial class SuperAddAdmin : Form
+    public partial class SuperUpdateAdmin : Form
     {
         Administrador a;
         ControladorSuper cs;
-        public SuperAddAdmin()
+        public SuperUpdateAdmin()
         {
             cs = new ControladorSuper();
             a = null;
             InitializeComponent();
-        }
-
-        internal Personal getPersonal()
-        {
-            throw new NotImplementedException();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -37,13 +31,16 @@ namespace ColoniesApplication
             String email = textBox5.Text;
             int nSS = int.Parse(textBox6.Text);
             String titulacion = textBox7.Text;
-            a = new Administrador(dni,nombre,apellido,telefono,email,nSS,titulacion);
+            a = new Administrador(dni, nombre, apellido, telefono, email, nSS, titulacion);
 
-            if (cs.insertarAdmin(a)) {
-                MessageBox.Show("Administrador añadido");
+            if (cs.modificarAdmin(a))
+            {
+                MessageBox.Show("Administrador modificado");
                 this.Close();
-            } else {
-                MessageBox.Show("Administrador no añadido");
+            }
+            else
+            {
+                MessageBox.Show("Administrador no modificado");
             }
         }
     }

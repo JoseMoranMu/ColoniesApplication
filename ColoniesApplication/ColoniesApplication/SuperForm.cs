@@ -14,8 +14,6 @@ namespace ColoniesApplication
 {
     public partial class Super : Form
     {
-        Administrador a;
-        Monitor m;
         ControladorSuper cs;
         Colonias parent;
         public Super(Colonias parent)
@@ -58,8 +56,36 @@ namespace ColoniesApplication
             }
             listar();
         }
-        public void setAdministrador(Administrador a) {
-            this.a = a;
+
+
+        private void modificarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SuperUpdateAdmin update = new SuperUpdateAdmin();
+            if (update.ShowDialog() == DialogResult.OK)
+            {
+
+            }
+            listar();
+        }
+
+        private void añadirToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void eliminarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void añadirToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Super_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
