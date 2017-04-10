@@ -251,7 +251,7 @@ namespace Model
         }
 
         /// <summary>
-        /// METODOS CONTROLADOR ADMIN
+        /// METODOS CONTROLADOR ADMIN//////
         /// </summary>
         /// <param name="carnet_ninio"></param>
         /// <param name="fecha_inicio"></param>
@@ -260,6 +260,7 @@ namespace Model
         /// <returns></returns>
         public bool modificarInscripcion(int carnet_ninio, DateTime fecha_inicio, string nombre_casa, int numero_inscripcion)
         {
+            String hola = "hola";
             throw new NotImplementedException();
         }
 
