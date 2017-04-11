@@ -15,11 +15,11 @@ namespace Controlador
             bd = new ColoniesBD();            
         }
         
-        public bool insertatNens(Ninio n) {
-            return bd.insertatNens(n);
+        public bool insertatNens(Ninio n, string codpoblacion) {
+            return bd.insertatNens(n, codpoblacion);
         }
-        public bool modificarNen(Ninio n) {
-            return bd.modificarNen(n);
+        public bool modificarNen(Ninio n, string codpoblacion) {
+            return bd.modificarNen(n, codpoblacion);
         }
         public bool insertarInscripcion(int carnet_ninio, DateTime fecha_inicio, String nombre_casa, int numero_inscripcion) {
             return bd.insertarInscripcion(carnet_ninio, fecha_inicio, nombre_casa, numero_inscripcion);

@@ -41,14 +41,14 @@ namespace Model
             if (!(password == p.getEmail()))
             {
                 p = null;
-            }else {
+            } else {
                 p = getRole(p);
 
             }
             sqlCon.Close();
             sqlReader.Close();
             return p;
-        }       
+        }
 
         private Personal getRole(Personal p)
         {
@@ -117,20 +117,20 @@ namespace Model
             //insertar en la tabla "personal" el objeto p y en la tabla "administrador" el 
             //numSS y la titulacion("admin" en este caso)
             //TODO query
-            Boolean flag=false;            
+            Boolean flag = false;
             bool b = false;
             try
-            {                                
+            {
                 MySqlConnection sqlCon = new MySqlConnection("Server= localhost; Database= colonies;Uid=alumne;Pwd=alumne;");
                 sqlCon.Open();
 
                 //insertar personal (dni, nombre, apellidos, teléfono, email)
-                String query1 = "INSERT INTO personal VALUES (" + a.getDNI() + "," + a.getName() + "," + a.getLastName() + "," + a.getPhone() + "," + a.getEmail() + ")";
+                String query1 = "INSERT INTO personal VALUES ('" + a.getDNI() + "','" + a.getName() + "','" + a.getLastName() + "','" + a.getPhone() + "','" + a.getEmail() + "')";
                 MySqlCommand mysqlCmd1 = new MySqlCommand(query1, sqlCon);
                 MySqlDataReader sqlReader1 = mysqlCmd1.ExecuteReader();
 
                 //insertar administrador (p.dni, numSS, p.role)
-                String query2 = "INSERT INTO administrador VALUES (" + a.getDNI() + "," + a.getNSS() + "," + a.getTitulacion()+")";
+                String query2 = "INSERT INTO administrador VALUES ('" + a.getDNI() + "'," + a.getNSS() + ",'" + a.getTitulacion() + "')";
                 MySqlCommand mysqlCmd2 = new MySqlCommand(query2, sqlCon);
                 MySqlDataReader sqlReader2 = mysqlCmd2.ExecuteReader();
 
@@ -142,7 +142,7 @@ namespace Model
             catch (MySqlException)
             {
                 flag = false;
-            }            
+            }
             return flag;
         }
 
@@ -154,12 +154,12 @@ namespace Model
                 //udpate tabla personal
                 MySqlConnection sqlCon = new MySqlConnection("Server= localhost; Database= colonies;Uid=alumne;Pwd=alumne;");
                 sqlCon.Open();
-                String query1 = "UPDATE personal SET nombre=" + a.getName() + ", apellidos=" + a.getLastName() + ", teléfono=" + a.getPhone() + ", email=" + a.getEmail() + "WHERE DNI=" + a.getDNI() /*+ ";"*/;
+                String query1 = "UPDATE personal SET nombre='" + a.getName() + "', apellidos='" + a.getLastName() + "', teléfono='" + a.getPhone() + "', email='" + a.getEmail() + "' WHERE DNI= '" + a.getDNI() + "'"/*+ ";"*/;
                 MySqlCommand mysqlCmd1 = new MySqlCommand(query1, sqlCon);
                 MySqlDataReader sqlReader1 = mysqlCmd1.ExecuteReader();
-                
+
                 //update tabla administrador
-                String query2 = "UPDATE administrador SET num_SS=" + a.getNSS() + ", titulacion=" + a.getTitulacion() + "WHERE DNI=" + a.getDNI() /*+ ";"*/;
+                String query2 = "UPDATE administrador SET num_SS=" + a.getNSS() + ", titulacion='" + a.getTitulacion() + "' WHERE DNI='" + a.getDNI() + "'" /*+ ";"*/;
                 MySqlCommand mysqlCmd2 = new MySqlCommand(query2, sqlCon);
                 MySqlDataReader sqlReader2 = mysqlCmd2.ExecuteReader();
 
@@ -176,14 +176,14 @@ namespace Model
             return flag;
         }
 
-        public bool borrarMonitor(String  dni)
+        public bool borrarMonitor(String dni)
         {
-            Boolean flag=false;
+            Boolean flag = false;
             try
             {
                 MySqlConnection sqlCon = new MySqlConnection("Server= localhost; Database= colonies;Uid=alumne;Pwd=alumne;");
                 sqlCon.Open();
-                String query1 = "DELETE FROM monitor WHERE DNI=" + dni /*+ ";"*/;
+                String query1 = "DELETE FROM monitor WHERE DNI='" + dni +"'"/*+ ";"*/;
                 MySqlCommand mysqlCmd1 = new MySqlCommand(query1, sqlCon);
                 MySqlDataReader sqlReader1 = mysqlCmd1.ExecuteReader();
                 flag = true;
@@ -192,7 +192,7 @@ namespace Model
             }
             catch (MySqlException) {
                 flag = false;
-            }            
+            }
             return flag;
         }
 
@@ -202,8 +202,8 @@ namespace Model
             try
             {
                 MySqlConnection sqlCon = new MySqlConnection("Server= localhost; Database= colonies;Uid=alumne;Pwd=alumne;");
-                sqlCon.Open(); 
-                 String query1 = "INSERT INTO monitor VALUES (" + m.getDNI() + ", "+ m.getFechaNacimiento() + ")";
+                sqlCon.Open();
+                String query1 = "INSERT INTO monitor VALUES ('" + m.getDNI() + "', " + m.getFechaNacimiento() + ")"/*+ ";"*/;
                 MySqlCommand mysqlCmd1 = new MySqlCommand(query1, sqlCon);
                 MySqlDataReader sqlReader1 = mysqlCmd1.ExecuteReader();
                 flag = true;
@@ -235,7 +235,7 @@ namespace Model
             {
                 MySqlConnection sqlCon = new MySqlConnection("Server= localhost; Database= colonies;Uid=alumne;Pwd=alumne;");
                 sqlCon.Open();
-                String query1 = "INSERT INTO actividad VALUES (" + a.getCodigo() + ", " + a.getDescripcion() + ")";
+                String query1 = "INSERT INTO actividad VALUES ('" + a.getCodigo() + "', '" + a.getDescripcion() + "')"/*+ ";"*/;
                 MySqlCommand mysqlCmd1 = new MySqlCommand(query1, sqlCon);
                 MySqlDataReader sqlReader1 = mysqlCmd1.ExecuteReader();
                 flag = true;
@@ -260,25 +260,90 @@ namespace Model
         /// <returns></returns>
         public bool modificarInscripcion(int carnet_ninio, DateTime fecha_inicio, string nombre_casa, int numero_inscripcion)
         {
-            String hola = "hola";
-            throw new NotImplementedException();
+
+            Boolean flag = false;
+            try
+            {
+                MySqlConnection sqlCon = new MySqlConnection("Server= localhost; Database= colonies;Uid=alumne;Pwd=alumne;");
+                sqlCon.Open();
+                String query1 = "UPDATE INSCRIPCIONES_TANDA_CASA SET fecha_inicio=" + fecha_inicio + ", nombre_casa='" + nombre_casa + "', numero_inscripcion=" + numero_inscripcion + " WHERE carnet_ninio='" + carnet_ninio + "'" /*+ ";"*/;
+                MySqlCommand mysqlCmd1 = new MySqlCommand(query1, sqlCon);
+                MySqlDataReader sqlReader1 = mysqlCmd1.ExecuteReader();
+
+                sqlReader1.Close();
+                flag = true;
+                sqlCon.Close();
+            }
+            catch (MySqlException)
+            {
+                flag = false;
+            }
+
+            return flag;
         }
 
         public bool insertarInscripcion(int carnet_ninio, DateTime fecha_inicio, string nombre_casa, int numero_inscripcion)
         {
-            throw new NotImplementedException();
-        }
+            Boolean flag = false;
+            try
+            {
+                MySqlConnection sqlCon = new MySqlConnection("Server= localhost; Database= colonies;Uid=alumne;Pwd=alumne;");
+                sqlCon.Open();
+                String query1 = "INSERT INTO INSCRIPCIONES_TANDA_CASA VALUES (" + carnet_ninio + ", " + fecha_inicio + ", '" + nombre_casa + "', " + numero_inscripcion + "')"/*+ ";"*/;
+                MySqlCommand mysqlCmd1 = new MySqlCommand(query1, sqlCon);
+                MySqlDataReader sqlReader1 = mysqlCmd1.ExecuteReader();
+                flag = true;
+                sqlReader1.Close();
+                sqlCon.Close();
+            }
+            catch (MySqlException)
+            {
+                flag = false;
+            }
+            return flag;
+        }        
+    
 
-        public bool modificarNen(Ninio n)
+        public bool modificarNen(Ninio n, string codpoblacion)
         {
-            throw new NotImplementedException();
+            Boolean flag = false;
+            try
+            {
+                MySqlConnection sqlCon = new MySqlConnection("Server= localhost; Database= colonies;Uid=alumne;Pwd=alumne;");
+                sqlCon.Open();
+                String query1 = "UPDATE nino SET nombre='" + n.getNombre() + "', apellidos='" + n.getApellidos() + "', direccion='" + n.getDireccion() + "', sexo='" + n.getSexo() + "', anio_nacimiento=" + n.getAnio_nacimiento() + ", codigo_poblacion='" + codpoblacion + "' WHERE DNI=" + n.getCarnet() /*+ ";"*/;
+                MySqlCommand mysqlCmd1 = new MySqlCommand(query1, sqlCon);
+                MySqlDataReader sqlReader1 = mysqlCmd1.ExecuteReader();
+
+                sqlReader1.Close();                
+                flag = true;
+                sqlCon.Close();
+            }
+            catch (MySqlException)
+            {
+                flag = false;
+            }
+
+            return flag;            
         }
 
-        public bool insertatNens(Ninio n)
+        public bool insertatNens(Ninio n, string codpoblacion)
         {
-            throw new NotImplementedException();
+            Boolean flag = false;
+            try {            
+            MySqlConnection sqlCon = new MySqlConnection("Server= localhost; Database= colonies;Uid=alumne;Pwd=alumne;");
+            sqlCon.Open();
+            String query1 = "INSERT INTO nino VALUES (" + n.getCarnet() + ", '" + n.getNombre() + "', '" + n.getApellidos() + "', '" + n.getDireccion() + "', '" + n.getDireccion() + "', '" + n.getSexo() + "', " + n.getAnio_nacimiento() + ", '" + codpoblacion + "')";
+            MySqlCommand mysqlCmd1 = new MySqlCommand(query1, sqlCon);
+            MySqlDataReader sqlReader1 = mysqlCmd1.ExecuteReader();
+            flag = true;
+            sqlReader1.Close();
+            sqlCon.Close();
+        }catch (MySqlException){
+            flag=false;
         }
-
+            return flag;
+        }
 
     }
 }
