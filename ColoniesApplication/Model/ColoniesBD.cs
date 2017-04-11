@@ -251,7 +251,7 @@ namespace Model
         }
 
         /// <summary>
-        /// METODOS CONTROLADOR ADMIN//////
+        /// METODOS CONTROLADOR ADMIN //////
         /// </summary>
         /// <param name="carnet_ninio"></param>
         /// <param name="fecha_inicio"></param>
@@ -333,8 +333,8 @@ namespace Model
             try {            
             MySqlConnection sqlCon = new MySqlConnection("Server= localhost; Database= colonies;Uid=alumne;Pwd=alumne;");
             sqlCon.Open();
-            String query1 = "INSERT INTO nino VALUES (" + n.getCarnet() + ", '" + n.getNombre() + "', '" + n.getApellidos() + "', '" + n.getDireccion() + "', '" + n.getDireccion() + "', '" + n.getSexo() + "', " + n.getAnio_nacimiento() + ", '" + codpoblacion + "')";
-            MySqlCommand mysqlCmd1 = new MySqlCommand(query1, sqlCon);
+            String query1 = "INSERT INTO nino VALUES (" + n.getCarnet() + ", '" + n.getNombre() + "', '" + n.getApellidos() + "', '" + n.getDireccion() + "', '" + n.getDireccion() + "', '" + n.getSexo() + "', " + n.getAnio_nacimiento() + ", '" + codpoblacion + "')"/*+ ";"*/;
+                MySqlCommand mysqlCmd1 = new MySqlCommand(query1, sqlCon);
             MySqlDataReader sqlReader1 = mysqlCmd1.ExecuteReader();
             flag = true;
             sqlReader1.Close();
@@ -345,6 +345,34 @@ namespace Model
             return flag;
         }
 
+        /// <summary>
+        /// METODOS CONTROLADOR ADMIN //////
+        /// </summary>
+        /// <param name="dNI_monitor"></param>
+        /// <param name="código_tarea"></param>
+        /// <param name="fecha_inicio_tanda"></param>
+        /// <param name="dia_tarea"></param>
+        /// <returns></returns>
+        public bool registrarTascaTanda(string dNI_monitor, string código_tarea, DateTime fecha_inicio_tanda, DateTime dia_tarea)
+        {
+            Boolean flag = false;
+            try
+            {
+                MySqlConnection sqlCon = new MySqlConnection("Server= localhost; Database= colonies;Uid=alumne;Pwd=alumne;");
+                sqlCon.Open();
+                String query1 = "INSERT INTO MONITOR_TAREAS_TANDAS  VALUES ('" + dNI_monitor + "', '" + código_tarea + "', " + fecha_inicio_tanda + ", " + dia_tarea + "')"/*+ ";"*/;
+                MySqlCommand mysqlCmd1 = new MySqlCommand(query1, sqlCon);
+                MySqlDataReader sqlReader1 = mysqlCmd1.ExecuteReader();
+                flag = true;
+                sqlReader1.Close();
+                sqlCon.Close();
+            }
+            catch (MySqlException)
+            {
+                flag = false;
+            }
+            return flag;
+        }
     }
 }
 
