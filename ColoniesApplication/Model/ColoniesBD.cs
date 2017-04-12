@@ -193,8 +193,13 @@ namespace Model
                 String query1 = "DELETE FROM monitor WHERE DNI='" + dni +"'"/*+ ";"*/;
                 MySqlCommand mysqlCmd1 = new MySqlCommand(query1, sqlCon);
                 MySqlDataReader sqlReader1 = mysqlCmd1.ExecuteReader();
-                flag = true;
                 sqlReader1.Close();
+
+                String query2 = "DELETE FROM personal WHERE DNI='" + dni + "'"/*+ ";"*/;
+                MySqlCommand mysqlCmd2 = new MySqlCommand(query2, sqlCon);
+                MySqlDataReader sqlReader2 = mysqlCmd2.ExecuteReader();
+                sqlReader2.Close();
+                flag = true;                
                 sqlCon.Close();
             }
             catch (MySqlException) {
@@ -210,6 +215,12 @@ namespace Model
             {
                 MySqlConnection sqlCon = new MySqlConnection("Server= localhost; Database= colonies;Uid=alumne;Pwd=alumne;");
                 sqlCon.Open();
+                String query0 = "INSERT INTO personal VALUES ('" + m.getDNI() + "','" + m.getName() + "','" + m.getLastName() + "','" + m.getPhone() + "','" + m.getEmail() + "')";
+
+                MySqlCommand mysqlCmd0 = new MySqlCommand(query0, sqlCon);
+                MySqlDataReader sqlReader0 = mysqlCmd0.ExecuteReader();
+                sqlReader0.Close();
+
                 String query1 = "INSERT INTO monitor VALUES ('" + m.getDNI() + "', " + m.getFechaNacimiento() + ")"/*+ ";"*/;
                 MySqlCommand mysqlCmd1 = new MySqlCommand(query1, sqlCon);
                 MySqlDataReader sqlReader1 = mysqlCmd1.ExecuteReader();
