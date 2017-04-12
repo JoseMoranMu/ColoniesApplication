@@ -16,11 +16,12 @@ namespace ColoniesApplication
     {
         Actividad a;
         ControladorSuper cs;
-        public SuperAddActividad()
+        public SuperAddActividad(Colonias parent)
         {
             InitializeComponent();
             a = null;
             cs = new ControladorSuper();
+            MdiParent = parent;
         }
 
         private void button1_Click(object sender, EventArgs e)

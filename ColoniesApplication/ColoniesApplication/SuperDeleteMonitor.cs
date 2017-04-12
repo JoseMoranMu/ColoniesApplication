@@ -14,10 +14,11 @@ namespace ColoniesApplication
     public partial class SuperDeleteMonitor : Form
     {
         ControladorSuper cs;
-        public SuperDeleteMonitor()
+        public SuperDeleteMonitor(Colonias parent)
         {
             cs = new ControladorSuper();
             InitializeComponent();
+            MdiParent = parent;
         }
 
         private void button1_Click(object sender, EventArgs e)

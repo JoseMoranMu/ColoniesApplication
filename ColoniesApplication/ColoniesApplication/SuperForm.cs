@@ -34,7 +34,7 @@ namespace ColoniesApplication
             {
                 ListViewItem lVI = listView1.Items.Add(list[i].getDNI());
                 lVI.SubItems.Add(list[i].getName());
-              lVI.SubItems.Add(list[i].getLastName());
+               lVI.SubItems.Add(list[i].getLastName());
                lVI.SubItems.Add(list[i].getPhone());
                lVI.SubItems.Add(list[i].getEmail());
                 if (list[i] is Administrador)
@@ -49,58 +49,44 @@ namespace ColoniesApplication
 
         private void añadirToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SuperAddAdmin add = new SuperAddAdmin();
-            if (add.ShowDialog() == DialogResult.OK) {
-
-            }
-            listar();
+            SuperAddAdmin add = new SuperAddAdmin(parent);
+            add.Show();
         }
 
 
         private void modificarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SuperUpdateAdmin update = new SuperUpdateAdmin();
-            if (update.ShowDialog() == DialogResult.OK)
-            {
-
-            }
-            listar();
+            SuperUpdateAdmin update = new SuperUpdateAdmin(parent);
+            update.Show();
         }
 
         private void añadirToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            SuperAddMonitor add = new SuperAddMonitor();
-            if (add.ShowDialog() == DialogResult.OK)
-            {
-
-            }
-            listar();
+            SuperAddMonitor add = new SuperAddMonitor(parent);
+            add.Show();
         }
 
         private void eliminarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SuperDeleteMonitor delete = new SuperDeleteMonitor();
-            if (delete.ShowDialog() == DialogResult.OK)
-            {
-
-            }
-            listar();
+            SuperDeleteMonitor delete = new SuperDeleteMonitor(parent);
+            delete.Show();
         }
 
         private void añadirToolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            SuperAddActividad add = new SuperAddActividad();
-            if (add.ShowDialog() == DialogResult.OK)
-            {
-
-            }
-            listar();
+            SuperAddActividad add = new SuperAddActividad(parent);
+            add.Show();
         }
 
         private void close(object sender, FormClosedEventArgs e)
         {
             Login login = new Login(parent);
             login.Show();
+        }
+
+        private void refrescarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            listar();
         }
     }
 }

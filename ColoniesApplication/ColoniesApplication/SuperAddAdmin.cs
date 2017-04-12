@@ -16,11 +16,12 @@ namespace ColoniesApplication
     {
         Administrador a;
         ControladorSuper cs;
-        public SuperAddAdmin()
+        public SuperAddAdmin(Colonias parent)
         {
             cs = new ControladorSuper();
             a = null;
             InitializeComponent();
+            MdiParent = parent;
         }
 
         internal Personal getPersonal()

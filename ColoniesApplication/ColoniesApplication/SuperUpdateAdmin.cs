@@ -15,11 +15,12 @@ namespace ColoniesApplication
     {
         Administrador a;
         ControladorSuper cs;
-        public SuperUpdateAdmin()
+        public SuperUpdateAdmin(Colonias parent)
         {
             cs = new ControladorSuper();
             a = null;
             InitializeComponent();
+            MdiParent = parent;
         }
 
         private void button1_Click(object sender, EventArgs e)

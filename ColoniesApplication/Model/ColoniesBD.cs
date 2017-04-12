@@ -220,16 +220,17 @@ namespace Model
                 MySqlCommand mysqlCmd0 = new MySqlCommand(query0, sqlCon);
                 MySqlDataReader sqlReader0 = mysqlCmd0.ExecuteReader();
                 sqlReader0.Close();
-
-                String query1 = "INSERT INTO monitor VALUES ('" + m.getDNI() + "', " + m.getFechaNacimiento() + ")"/*+ ";"*/;
+                Console.WriteLine(m.getFechaNacimiento().Date.ToString("yyyy-MM-dd"));
+                String query1 = "INSERT INTO monitor VALUES ('" + m.getDNI() + "', '" + m.getFechaNacimiento().Date.ToString("yyyy-MM-dd") + "')";
                 MySqlCommand mysqlCmd1 = new MySqlCommand(query1, sqlCon);
                 MySqlDataReader sqlReader1 = mysqlCmd1.ExecuteReader();
                 flag = true;
                 sqlReader1.Close();
                 sqlCon.Close();
             }
-            catch (MySqlException)
+            catch (MySqlException e)
             {
+                Console.Write(e.Message);
                 flag = false;
             }
 

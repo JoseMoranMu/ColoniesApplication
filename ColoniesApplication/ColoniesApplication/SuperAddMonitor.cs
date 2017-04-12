@@ -16,12 +16,14 @@ namespace ColoniesApplication
     {
         Monitor m;
         ControladorSuper cs;
-        public SuperAddMonitor()
+        public SuperAddMonitor(Colonias parent)
         {
             m = null;
             cs = new ControladorSuper();
             InitializeComponent();
-           
+            MdiParent= parent;
+
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -32,6 +34,7 @@ namespace ColoniesApplication
             String telefono = textBox4.Text;
             String email = textBox5.Text;
             DateTime naixement = dateTimePicker1.Value.Date;
+            DateTime fecha = dateTimePicker1.Value.Date;
             m = new Monitor(dni, nombre, apellido, telefono, email, naixement);
 
             if (cs.insertarMonitor(m))
@@ -43,6 +46,9 @@ namespace ColoniesApplication
             {
                 MessageBox.Show("Monitor no modificado");
             }
+            
         }
+        
     }
+
 }
