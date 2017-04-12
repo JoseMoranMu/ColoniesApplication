@@ -38,15 +38,20 @@ namespace Model
                     (String)sqlReader.GetValue(3),
                     (String)sqlReader.GetValue(4));
             }
-            if (!(password == p.getEmail()))
+            if (p != null)
             {
-                p = null;
-            } else {
-                p = getRole(p);
+                if (!(password == p.getEmail()))
+                {
+                    p = null;
+                }
+                else
+                {
+                    p = getRole(p);
 
+                }
+                sqlCon.Close();
+                sqlReader.Close();
             }
-            sqlCon.Close();
-            sqlReader.Close();
             return p;
         }
 
@@ -128,19 +133,20 @@ namespace Model
                 String query1 = "INSERT INTO personal VALUES ('" + a.getDNI() + "','" + a.getName() + "','" + a.getLastName() + "','" + a.getPhone() + "','" + a.getEmail() + "')";
                 MySqlCommand mysqlCmd1 = new MySqlCommand(query1, sqlCon);
                 MySqlDataReader sqlReader1 = mysqlCmd1.ExecuteReader();
+                sqlReader1.Close();
 
                 //insertar administrador (p.dni, numSS, p.role)
                 String query2 = "INSERT INTO administrador VALUES ('" + a.getDNI() + "'," + a.getNSS() + ",'" + a.getTitulacion() + "')";
                 MySqlCommand mysqlCmd2 = new MySqlCommand(query2, sqlCon);
                 MySqlDataReader sqlReader2 = mysqlCmd2.ExecuteReader();
 
-                sqlReader1.Close();
                 sqlReader2.Close();
                 flag = true;
                 sqlCon.Close();
             }
-            catch (MySqlException)
+            catch (MySqlException e)
             {
+                Console.Write(e.Message);
                 flag = false;
             }
             return flag;
@@ -157,13 +163,14 @@ namespace Model
                 String query1 = "UPDATE personal SET nombre='" + a.getName() + "', apellidos='" + a.getLastName() + "', teléfono='" + a.getPhone() + "', email='" + a.getEmail() + "' WHERE DNI= '" + a.getDNI() + "'"/*+ ";"*/;
                 MySqlCommand mysqlCmd1 = new MySqlCommand(query1, sqlCon);
                 MySqlDataReader sqlReader1 = mysqlCmd1.ExecuteReader();
+                sqlReader1.Close();
 
                 //update tabla administrador
                 String query2 = "UPDATE administrador SET num_SS=" + a.getNSS() + ", titulacion='" + a.getTitulacion() + "' WHERE DNI='" + a.getDNI() + "'" /*+ ";"*/;
                 MySqlCommand mysqlCmd2 = new MySqlCommand(query2, sqlCon);
                 MySqlDataReader sqlReader2 = mysqlCmd2.ExecuteReader();
 
-                sqlReader1.Close();
+
                 sqlReader2.Close();
                 flag = true;
                 sqlCon.Close();

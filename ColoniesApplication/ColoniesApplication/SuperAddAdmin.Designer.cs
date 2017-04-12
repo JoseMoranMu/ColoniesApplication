@@ -154,8 +154,10 @@
             // 
             this.textBox7.Location = new System.Drawing.Point(180, 276);
             this.textBox7.Name = "textBox7";
+            this.textBox7.ReadOnly = true;
             this.textBox7.Size = new System.Drawing.Size(100, 20);
             this.textBox7.TabIndex = 13;
+            this.textBox7.Text = "Admin";
             // 
             // button1
             // 
