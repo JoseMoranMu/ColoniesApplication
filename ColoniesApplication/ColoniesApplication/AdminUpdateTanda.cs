@@ -7,17 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Controlador;
 
 namespace ColoniesApplication
 {
-    public partial class MoniForm : Form
+    public partial class AdminUpdateTanda : Form
     {
-        ControladorMonitor cm;
-        public MoniForm()
+        public AdminUpdateTanda(AdminForm parent)
         {
             InitializeComponent();
-            cm = new ControladorMonitor();
+            this.MdiParent = parent;
         }
     }
 }

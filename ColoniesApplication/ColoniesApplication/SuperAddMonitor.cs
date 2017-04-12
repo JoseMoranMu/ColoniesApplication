@@ -16,7 +16,7 @@ namespace ColoniesApplication
     {
         Monitor m;
         ControladorSuper cs;
-        public SuperAddMonitor(Colonias parent)
+        public SuperAddMonitor(Super parent)
         {
             m = null;
             cs = new ControladorSuper();

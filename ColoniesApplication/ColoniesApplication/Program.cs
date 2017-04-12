@@ -16,7 +16,7 @@ namespace ColoniesApplication
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Colonias());
+            Application.Run(new Login());
         }
     }
 }

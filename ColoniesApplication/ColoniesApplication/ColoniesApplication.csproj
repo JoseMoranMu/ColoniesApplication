@@ -62,11 +62,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminAddNinio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminAddNinio.Designer.cs">
+      <DependentUpon>AdminAddNinio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AdminAddTanda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminAddTanda.Designer.cs">
+      <DependentUpon>AdminAddTanda.cs</DependentUpon>
+    </Compile>
     <Compile Include="AdminForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="AdminForm.Designer.cs">
       <DependentUpon>AdminForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AdminUpdateNinio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminUpdateNinio.Designer.cs">
+      <DependentUpon>AdminUpdateNinio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AdminUpdateTanda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminUpdateTanda.Designer.cs">
+      <DependentUpon>AdminUpdateTanda.cs</DependentUpon>
     </Compile>
     <Compile Include="Colonias.cs">
       <SubType>Form</SubType>
@@ -124,6 +148,9 @@
     <Compile Include="SuperUpdateAdmin.Designer.cs">
       <DependentUpon>SuperUpdateAdmin.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AdminForm.resx">
+      <DependentUpon>AdminForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Colonias.resx">
       <DependentUpon>Colonias.cs</DependentUpon>
     </EmbeddedResource>

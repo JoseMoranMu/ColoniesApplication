@@ -15,7 +15,6 @@ namespace ColoniesApplication
         public Colonias()
         {
             InitializeComponent();
-            new Login(this).Show();
         }
     }
 }

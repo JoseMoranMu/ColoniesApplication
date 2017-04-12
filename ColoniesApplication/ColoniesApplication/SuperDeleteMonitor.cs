@@ -14,7 +14,7 @@ namespace ColoniesApplication
     public partial class SuperDeleteMonitor : Form
     {
         ControladorSuper cs;
-        public SuperDeleteMonitor(Colonias parent)
+        public SuperDeleteMonitor(Super parent)
         {
             cs = new ControladorSuper();
             InitializeComponent();

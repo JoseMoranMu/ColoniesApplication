@@ -16,7 +16,7 @@ namespace ColoniesApplication
     {
         Actividad a;
         ControladorSuper cs;
-        public SuperAddActividad(Colonias parent)
+        public SuperAddActividad(Super parent)
         {
             InitializeComponent();
             a = null;

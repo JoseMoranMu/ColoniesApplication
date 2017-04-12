@@ -14,13 +14,12 @@ namespace ColoniesApplication
     public partial class Login : Form
     {
         Colonias parent;
-        public Login(Colonias parent)
+        public Login()
         {
             InitializeComponent();
             this.MdiParent = parent;
-            this.parent = parent;
-            textBox2.Text = "72621359D";
-            textBox1.Text = "sadmin@colonias.com";
+            textBox2.Text = "63623462B";
+            textBox1.Text = "jmoran@colonias.com";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -36,19 +35,18 @@ namespace ColoniesApplication
                     Administrador a = (Administrador)usuario;
                     if (a.getTitulacion().Equals("Super"))
                     {
-                        new Super(parent).Show();
-                        this.Close();
+                        new Super().Show();
+
                     }
                     else if (a.getTitulacion().Equals("Admin")) {
 
-                        new AdminForm(parent).Show();
-                        this.Close();
+                        new AdminForm().Show();
 
                     }
                 }
                 else if(usuario is Monitor){
-                    new MoniForm(parent).Show();
-                    this.Close();
+                    new MoniForm().Show();
+ 
                 }
             }
             else {

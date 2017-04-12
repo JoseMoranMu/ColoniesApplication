@@ -16,7 +16,7 @@ namespace ColoniesApplication
     {
         Administrador a;
         ControladorSuper cs;
-        public SuperAddAdmin(Colonias parent)
+        public SuperAddAdmin(Super parent)
         {
             cs = new ControladorSuper();
             a = null;

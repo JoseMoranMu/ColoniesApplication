@@ -37,14 +37,6 @@
             this.eliminarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tareasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.añadirToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.DNI = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Nombre = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Apellido = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Telefono = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Email = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Role = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.refrescarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -53,8 +45,7 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.administradorToolStripMenuItem,
             this.monitorToolStripMenuItem,
-            this.tareasToolStripMenuItem,
-            this.refrescarToolStripMenuItem});
+            this.tareasToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(642, 24);
@@ -73,14 +64,14 @@
             // añadirToolStripMenuItem
             // 
             this.añadirToolStripMenuItem.Name = "añadirToolStripMenuItem";
-            this.añadirToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.añadirToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.añadirToolStripMenuItem.Text = "Añadir";
             this.añadirToolStripMenuItem.Click += new System.EventHandler(this.añadirToolStripMenuItem_Click);
             // 
             // modificarToolStripMenuItem
             // 
             this.modificarToolStripMenuItem.Name = "modificarToolStripMenuItem";
-            this.modificarToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.modificarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.modificarToolStripMenuItem.Text = "Modificar";
             this.modificarToolStripMenuItem.Click += new System.EventHandler(this.modificarToolStripMenuItem_Click);
             // 
@@ -122,67 +113,13 @@
             this.añadirToolStripMenuItem2.Text = "Añadir";
             this.añadirToolStripMenuItem2.Click += new System.EventHandler(this.añadirToolStripMenuItem2_Click);
             // 
-            // listView1
-            // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.DNI,
-            this.Nombre,
-            this.Apellido,
-            this.Telefono,
-            this.Email,
-            this.Role});
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.listView1.Location = new System.Drawing.Point(0, 24);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(642, 291);
-            this.listView1.TabIndex = 1;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
-            // 
-            // DNI
-            // 
-            this.DNI.Text = "DNI";
-            this.DNI.Width = 78;
-            // 
-            // Nombre
-            // 
-            this.Nombre.Text = "Nombre";
-            this.Nombre.Width = 123;
-            // 
-            // Apellido
-            // 
-            this.Apellido.Text = "Apellido";
-            this.Apellido.Width = 141;
-            // 
-            // Telefono
-            // 
-            this.Telefono.Text = "Telefono";
-            this.Telefono.Width = 83;
-            // 
-            // Email
-            // 
-            this.Email.Text = "Email";
-            this.Email.Width = 87;
-            // 
-            // Role
-            // 
-            this.Role.Text = "Role";
-            this.Role.Width = 125;
-            // 
-            // refrescarToolStripMenuItem
-            // 
-            this.refrescarToolStripMenuItem.Name = "refrescarToolStripMenuItem";
-            this.refrescarToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
-            this.refrescarToolStripMenuItem.Text = "Refrescar";
-            this.refrescarToolStripMenuItem.Click += new System.EventHandler(this.refrescarToolStripMenuItem_Click);
-            // 
             // Super
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(642, 412);
-            this.Controls.Add(this.listView1);
             this.Controls.Add(this.menuStrip1);
+            this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Super";
             this.Text = "SuperForm";
@@ -202,16 +139,8 @@
         private System.Windows.Forms.ToolStripMenuItem tareasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem añadirToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem modificarToolStripMenuItem;
-        private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.ColumnHeader DNI;
-        private System.Windows.Forms.ColumnHeader Nombre;
-        private System.Windows.Forms.ColumnHeader Apellido;
-        private System.Windows.Forms.ColumnHeader Telefono;
-        private System.Windows.Forms.ColumnHeader Email;
-        private System.Windows.Forms.ColumnHeader Role;
         private System.Windows.Forms.ToolStripMenuItem añadirToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem eliminarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem añadirToolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem refrescarToolStripMenuItem;
     }
 }
