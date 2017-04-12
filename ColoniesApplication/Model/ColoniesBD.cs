@@ -257,8 +257,14 @@ namespace Model
                 String query1 = "INSERT INTO actividad VALUES ('" + a.getCodigo() + "', '" + a.getDescripcion() + "')"/*+ ";"*/;
                 MySqlCommand mysqlCmd1 = new MySqlCommand(query1, sqlCon);
                 MySqlDataReader sqlReader1 = mysqlCmd1.ExecuteReader();
-                flag = true;
                 sqlReader1.Close();
+
+                String query2 = "INSERT INTO actividad_casa VALUES ('" + a.getCodigo() + "', '" + casa + "',"+nivel+")"/*+ ";"*/;
+                MySqlCommand mysqlCmd2 = new MySqlCommand(query2, sqlCon);
+                MySqlDataReader sqlReader2 = mysqlCmd2.ExecuteReader();
+                sqlReader2.Close();
+
+                flag = true;                
                 sqlCon.Close();
             }
             catch (MySqlException)
