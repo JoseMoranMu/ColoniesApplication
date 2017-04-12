@@ -30,9 +30,9 @@ namespace ColoniesApplication
             String casa;
             int nivel;
 
-                codigo = textBox1.Text;
-                descripcion = textBox2.Text;
-                casa = textBox3.Text;
+                codigo = textBox2.Text;
+                descripcion = textBox3.Text;
+            casa = comboBox1.SelectedItem.ToString().Substring(0, 3);
                 nivel = (int)numericUpDown1.Value;
 
                 a = new Actividad(codigo, descripcion);
