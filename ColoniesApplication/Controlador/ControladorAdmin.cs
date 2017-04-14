@@ -21,10 +21,10 @@ namespace Controlador
         public bool modificarNen(Ninio n, string codpoblacion) {
             return bd.modificarNen(n, codpoblacion);
         }
-        public bool insertarInscripcion(int carnet_ninio, DateTime fecha_inicio, String nombre_casa, int numero_inscripcion) {
+        public bool insertarInscripcion(int carnet_ninio, String fecha_inicio, String nombre_casa, int numero_inscripcion) {
             return bd.insertarInscripcion(carnet_ninio, fecha_inicio, nombre_casa, numero_inscripcion);
         }
-        public bool modificarInscripcion(int carnet_ninio, DateTime fecha_inicio, String nombre_casa, int numero_inscripcion)
+        public bool modificarInscripcion(int carnet_ninio, String fecha_inicio, String nombre_casa, int numero_inscripcion)
         {
             return bd.modificarInscripcion(carnet_ninio, fecha_inicio, nombre_casa, numero_inscripcion);
         }

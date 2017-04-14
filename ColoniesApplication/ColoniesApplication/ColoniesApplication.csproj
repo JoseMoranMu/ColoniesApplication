@@ -148,8 +148,20 @@
     <Compile Include="SuperUpdateAdmin.Designer.cs">
       <DependentUpon>SuperUpdateAdmin.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AdminAddNinio.resx">
+      <DependentUpon>AdminAddNinio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdminAddTanda.resx">
+      <DependentUpon>AdminAddTanda.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AdminForm.resx">
       <DependentUpon>AdminForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdminUpdateNinio.resx">
+      <DependentUpon>AdminUpdateNinio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdminUpdateTanda.resx">
+      <DependentUpon>AdminUpdateTanda.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Colonias.resx">
       <DependentUpon>Colonias.cs</DependentUpon>

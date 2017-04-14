@@ -7,16 +7,7 @@ using MySql.Data.MySqlClient;
 
 namespace Model
 {
-    /**A TENER EN CUENTA EN TODAS LAS QUERYS:
-     * 
-     * Fijate que las querys que se utilizasn en Login y en getRole
-     * cuando vamos a concatenar un valor para añadirlo a la query, si ese
-     * valor es un string se abren unas comillas simples que luego hay que cerrar
-     * he estado haciendo unas pruebas y ninguna query me funciona, es posible que sea 
-     * por eso, añade las comillas simples y pruebalo, en principio a parte
-     * de la vista de Super ya esta terminada
-     * 
-     * */
+
     public class ColoniesBD
     {
         public ColoniesBD() {
@@ -119,9 +110,6 @@ namespace Model
 
         public bool insertarAdmin(Administrador a)
         {
-            //insertar en la tabla "personal" el objeto p y en la tabla "administrador" el 
-            //numSS y la titulacion("admin" en este caso)
-            //TODO query
             Boolean flag = false;
             bool b = false;
             try
@@ -239,16 +227,7 @@ namespace Model
 
         public bool insertarActividadCasa(Actividad a, String casa, int nivel)
         {
-            /**
-             * JOSE:
-             * Aparte de añadir actividad en la tabla actividad es 
-             * necesario añadir tmb la actividad en la tabla actividad_casa
-             * por lo que este metodo tmb pillara por parametro, 
-             * el codigo de casa (String)
-             * y el nivel que tiene (int)
-             * para que se pueda añadir a esa tabla
-             * te dejo preparado los parametros en la funcion
-             * */
+
             Boolean flag = false;
             try
             {
@@ -283,7 +262,7 @@ namespace Model
         /// <param name="nombre_casa"></param>
         /// <param name="numero_inscripcion"></param>
         /// <returns></returns>
-        public bool modificarInscripcion(int carnet_ninio, DateTime fecha_inicio, string nombre_casa, int numero_inscripcion)
+        public bool modificarInscripcion(int carnet_ninio, String fecha_inicio, string nombre_casa, int numero_inscripcion)
         {
 
             Boolean flag = false;
@@ -291,7 +270,7 @@ namespace Model
             {
                 MySqlConnection sqlCon = new MySqlConnection("Server= localhost; Database= colonies;Uid=alumne;Pwd=alumne;");
                 sqlCon.Open();
-                String query1 = "UPDATE INSCRIPCIONES_TANDA_CASA SET fecha_inicio=" + fecha_inicio + ", nombre_casa='" + nombre_casa + "', numero_inscripcion=" + numero_inscripcion + " WHERE carnet_ninio='" + carnet_ninio + "'" /*+ ";"*/;
+                String query1 = "UPDATE INSCRIPCIONES_TANDA_CASA SET  nombre_casa='" + nombre_casa + "', numero_inscripcion=" + numero_inscripcion + " WHERE carnet_niño='" + carnet_ninio + "' AND fecha_inicio='" + fecha_inicio + "'" /*+ ";"*/;
                 MySqlCommand mysqlCmd1 = new MySqlCommand(query1, sqlCon);
                 MySqlDataReader sqlReader1 = mysqlCmd1.ExecuteReader();
 
@@ -299,30 +278,32 @@ namespace Model
                 flag = true;
                 sqlCon.Close();
             }
-            catch (MySqlException)
+            catch (MySqlException e)
             {
+                Console.WriteLine(e.Message);
                 flag = false;
             }
 
             return flag;
         }
 
-        public bool insertarInscripcion(int carnet_ninio, DateTime fecha_inicio, string nombre_casa, int numero_inscripcion)
+        public bool insertarInscripcion(int carnet_ninio, String fecha_inicio, string nombre_casa, int numero_inscripcion)
         {
             Boolean flag = false;
             try
             {
                 MySqlConnection sqlCon = new MySqlConnection("Server= localhost; Database= colonies;Uid=alumne;Pwd=alumne;");
                 sqlCon.Open();
-                String query1 = "INSERT INTO INSCRIPCIONES_TANDA_CASA VALUES (" + carnet_ninio + ", " + fecha_inicio + ", '" + nombre_casa + "', " + numero_inscripcion + "')"/*+ ";"*/;
+                String query1 = "INSERT INTO INSCRIPCIONES_TANDA_CASA VALUES (" + carnet_ninio + ", '" + fecha_inicio + "', '" + nombre_casa + "', " + numero_inscripcion + ")"/*+ ";"*/;
                 MySqlCommand mysqlCmd1 = new MySqlCommand(query1, sqlCon);
                 MySqlDataReader sqlReader1 = mysqlCmd1.ExecuteReader();
                 flag = true;
                 sqlReader1.Close();
                 sqlCon.Close();
             }
-            catch (MySqlException)
+            catch (MySqlException e)
             {
+                Console.WriteLine(e.Message);
                 flag = false;
             }
             return flag;
@@ -336,7 +317,7 @@ namespace Model
             {
                 MySqlConnection sqlCon = new MySqlConnection("Server= localhost; Database= colonies;Uid=alumne;Pwd=alumne;");
                 sqlCon.Open();
-                String query1 = "UPDATE nino SET nombre='" + n.getNombre() + "', apellidos='" + n.getApellidos() + "', direccion='" + n.getDireccion() + "', sexo='" + n.getSexo() + "', anio_nacimiento=" + n.getAnio_nacimiento() + ", codigo_poblacion='" + codpoblacion + "' WHERE DNI=" + n.getCarnet() /*+ ";"*/;
+                String query1 = "UPDATE nino SET nombre='" + n.getNombre() + "', apellidos='" + n.getApellidos() + "', direccion='" + n.getDireccion() + "', sexo='" + n.getSexo() + "', anio_nacimiento=" + n.getAnio_nacimiento() + ", codigo_poblacion='" + codpoblacion + "' WHERE carnet=" + n.getCarnet() /*+ ";"*/;
                 MySqlCommand mysqlCmd1 = new MySqlCommand(query1, sqlCon);
                 MySqlDataReader sqlReader1 = mysqlCmd1.ExecuteReader();
 
@@ -344,8 +325,9 @@ namespace Model
                 flag = true;
                 sqlCon.Close();
             }
-            catch (MySqlException)
+            catch (MySqlException e)
             {
+                Console.WriteLine(e.Message);
                 flag = false;
             }
 
@@ -358,14 +340,14 @@ namespace Model
             try {            
             MySqlConnection sqlCon = new MySqlConnection("Server= localhost; Database= colonies;Uid=alumne;Pwd=alumne;");
             sqlCon.Open();
-            String query1 = "INSERT INTO nino VALUES (" + n.getCarnet() + ", '" + n.getNombre() + "', '" + n.getApellidos() + "', '" + n.getDireccion() + "', '" + n.getDireccion() + "', '" + n.getSexo() + "', " + n.getAnio_nacimiento() + ", '" + codpoblacion + "')"/*+ ";"*/;
+            String query1 = "INSERT INTO nino VALUES (" + n.getCarnet() + ", '" + n.getNombre() + "', '" + n.getApellidos() + "', '" + n.getDireccion() + "', '" + n.getSexo() + "', " + n.getAnio_nacimiento() + ", '" + codpoblacion + "')"/*+ ";"*/;
                 MySqlCommand mysqlCmd1 = new MySqlCommand(query1, sqlCon);
             MySqlDataReader sqlReader1 = mysqlCmd1.ExecuteReader();
             flag = true;
             sqlReader1.Close();
             sqlCon.Close();
-        }catch (MySqlException){
-            flag=false;
+        }catch (MySqlException e){
+                flag =false;
         }
             return flag;
         }

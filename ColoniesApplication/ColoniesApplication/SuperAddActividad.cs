@@ -37,7 +37,7 @@ namespace ColoniesApplication
                 nivel = (int)numericUpDown1.Value;
 
                 a = new Actividad(codigo, descripcion);
-            Console.WriteLine(nivel);
+
             if (cs.insertarActividadCasa(a, casa, nivel)) {
                 MessageBox.Show("Actividad añadida");
                 this.Close();
@@ -46,6 +46,7 @@ namespace ColoniesApplication
             {
                 MessageBox.Show("Actividad no añadida");
             }
+            
         }
     }
 }
