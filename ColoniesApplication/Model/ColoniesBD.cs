@@ -360,24 +360,40 @@ namespace Model
         /// <param name="fecha_inicio_tanda"></param>
         /// <param name="dia_tarea"></param>
         /// <returns></returns>
-        public bool registrarTascaTanda(string dNI_monitor, string código_tarea, DateTime fecha_inicio_tanda, DateTime dia_tarea)
+        public bool registrarTascaTanda(string dNI_monitor, string código_tarea, String fecha_inicio_tanda, String dia_tarea)
         {
+            Console.WriteLine("entra");
             Boolean flag = false;
+            
+            
+
+            
+            var list = (from a in db.personal
+                        select new (dni=a.DNI));
+            foreach (var r in list) {
+                Console.WriteLine(r.ToString());
+
+            }
+                /*
+                
+                Boolean flag = false;
             try
             {
                 MySqlConnection sqlCon = new MySqlConnection("Server= localhost; Database= colonies;Uid=alumne;Pwd=alumne;");
                 sqlCon.Open();
-                String query1 = "INSERT INTO MONITOR_TAREAS_TANDAS  VALUES ('" + dNI_monitor + "', '" + código_tarea + "', " + fecha_inicio_tanda + ", " + dia_tarea + "')"/*+ ";"*/;
+                String query1 = "INSERT INTO MONITOR_TAREAS_TANDAS  VALUES ('" + dNI_monitor + "', '" + código_tarea + "', " + fecha_inicio_tanda + ", " + dia_tarea + "')";
                 MySqlCommand mysqlCmd1 = new MySqlCommand(query1, sqlCon);
                 MySqlDataReader sqlReader1 = mysqlCmd1.ExecuteReader();
                 flag = true;
                 sqlReader1.Close();
                 sqlCon.Close();
             }
+            
             catch (MySqlException)
             {
                 flag = false;
             }
+            */
             return flag;
         }
     }

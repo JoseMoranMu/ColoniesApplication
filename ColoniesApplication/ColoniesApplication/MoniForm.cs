@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Controlador;
 
+
 namespace ColoniesApplication
 {
     public partial class MoniForm : Form
@@ -18,6 +19,11 @@ namespace ColoniesApplication
         {
             InitializeComponent();
             cm = new ControladorMonitor();
+        }
+
+        private void tareasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            cm.registarTascaTanda("", "", "", "");
         }
     }
 }

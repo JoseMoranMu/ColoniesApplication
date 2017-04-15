@@ -12,16 +12,13 @@ namespace Model
     using System;
     using System.Collections.Generic;
     
-    public partial class actividad
+    public partial class actividad_casa
     {
-        public actividad()
-        {
-            this.actividad_casa = new HashSet<actividad_casa>();
-        }
+        public string codigo_actividad { get; set; }
+        public string codigo_casa { get; set; }
+        public int nivel_calidad { get; set; }
     
-        public string codigo { get; set; }
-        public string descripcion { get; set; }
-    
-        public virtual ICollection<actividad_casa> actividad_casa { get; set; }
+        public virtual actividad actividad { get; set; }
+        public virtual casa casa { get; set; }
     }
 }

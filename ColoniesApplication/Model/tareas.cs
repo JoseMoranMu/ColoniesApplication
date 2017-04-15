@@ -12,16 +12,16 @@ namespace Model
     using System;
     using System.Collections.Generic;
     
-    public partial class actividad
+    public partial class tareas
     {
-        public actividad()
+        public tareas()
         {
-            this.actividad_casa = new HashSet<actividad_casa>();
+            this.monitor_tareas_tandas = new HashSet<monitor_tareas_tandas>();
         }
     
-        public string codigo { get; set; }
+        public string codigo_tareas { get; set; }
         public string descripcion { get; set; }
     
-        public virtual ICollection<actividad_casa> actividad_casa { get; set; }
+        public virtual ICollection<monitor_tareas_tandas> monitor_tareas_tandas { get; set; }
     }
 }

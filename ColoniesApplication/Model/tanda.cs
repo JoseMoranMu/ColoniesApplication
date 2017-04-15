@@ -12,18 +12,19 @@ namespace Model
     using System;
     using System.Collections.Generic;
     
-    public partial class monitor
+    public partial class tanda
     {
-        public monitor()
+        public tanda()
         {
+            this.inscripciones_tanda_casa = new HashSet<inscripciones_tanda_casa>();
             this.monitor_tanda_casa = new HashSet<monitor_tanda_casa>();
             this.monitor_tareas_tandas = new HashSet<monitor_tareas_tandas>();
         }
     
-        public string DNI { get; set; }
-        public System.DateTime fecha_nacimiento { get; set; }
+        public System.DateTime fecha_inicio { get; set; }
+        public System.DateTime fecha_fin { get; set; }
     
-        public virtual personal personal { get; set; }
+        public virtual ICollection<inscripciones_tanda_casa> inscripciones_tanda_casa { get; set; }
         public virtual ICollection<monitor_tanda_casa> monitor_tanda_casa { get; set; }
         public virtual ICollection<monitor_tareas_tandas> monitor_tareas_tandas { get; set; }
     }
