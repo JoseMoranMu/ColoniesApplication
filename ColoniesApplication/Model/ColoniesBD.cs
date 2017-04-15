@@ -140,7 +140,7 @@ namespace Model
             return flag;
         }
 
-        public bool modificarAdmin(administrador a)
+        public bool modificarAdmin(Administrador a)
         {
             Boolean flag = false;
             try
@@ -366,14 +366,14 @@ namespace Model
             Boolean flag = false;
             
             
-
+            /*
             
             var list = (from a in db.personal
                         select new (dni=a.DNI));
             foreach (var r in list) {
                 Console.WriteLine(r.ToString());
 
-            }
+            }*/
                 /*
                 
                 Boolean flag = false;
