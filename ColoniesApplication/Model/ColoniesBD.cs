@@ -46,6 +46,20 @@ namespace Model
             return p;
         }
 
+        public List<string> getDNIAdmin()
+        {
+            List<String> lista = new List<String>();
+            MySqlConnection sqlCon = new MySqlConnection("Server= localhost; Database= colonies;Uid=alumne;Pwd=alumne;");
+            sqlCon.Open();
+            String query = "Select DNI from personal";
+            MySqlCommand mysqlCmd = new MySqlCommand(query, sqlCon);
+            MySqlDataReader sqlReader = mysqlCmd.ExecuteReader();
+            while (sqlReader.Read())
+            {
+                lista.Add((String) sqlReader.GetValue(0));
+            }
+            return lista;
+        }
         private Personal getRole(Personal p)
         {
             Personal r = null;

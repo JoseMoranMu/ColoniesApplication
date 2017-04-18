@@ -31,5 +31,8 @@ namespace Controlador
         public bool insertarActividadCasa(Actividad a, String casa, int nivel) {
             return bd.insertarActividadCasa(a,casa,nivel);
         }
+        public List<String> getDNIAdmin() {
+            return bd.getDNIAdmin();
+        }
     }
 }

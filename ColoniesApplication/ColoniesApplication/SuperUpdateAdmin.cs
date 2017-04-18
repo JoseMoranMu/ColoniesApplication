@@ -21,11 +21,21 @@ namespace ColoniesApplication
             a = null;
             InitializeComponent();
             MdiParent = parent;
+            loadComboBox();
+        }
+
+        private void loadComboBox()
+        {
+            List<String> lista= cs.getDNIAdmin();
+            foreach (String s in lista) {
+                comboBox1.Items.Add(s);
+            }
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            String dni = textBox1.Text;
+            String dni = comboBox1.SelectedItem.ToString();
             String nombre = textBox2.Text;
             String apellido = textBox3.Text;
             String telefono = textBox4.Text;
