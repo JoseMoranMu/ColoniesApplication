@@ -18,8 +18,8 @@ namespace ColoniesApplication
         {
             InitializeComponent();
             this.MdiParent = parent;
-            textBox2.Text = "72621359D";
-            textBox1.Text = "sadmin@colonias.com";
+            textBox2.Text = "56296431K";
+            textBox1.Text = "olgacoll@colonias.com";
         }
 
         private void button1_Click(object sender, EventArgs e)

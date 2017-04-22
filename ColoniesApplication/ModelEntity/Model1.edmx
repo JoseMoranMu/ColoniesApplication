@@ -1,0 +1,986 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="coloniesModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="actividad">
+          <Key>
+            <PropertyRef Name="codigo" />
+          </Key>
+          <Property Name="codigo" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="actividad_casa">
+          <Key>
+            <PropertyRef Name="codigo_actividad" />
+            <PropertyRef Name="codigo_casa" />
+          </Key>
+          <Property Name="codigo_actividad" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="codigo_casa" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="nivel_calidad" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="administra_casa">
+          <Key>
+            <PropertyRef Name="DNI_Administrator" />
+            <PropertyRef Name="codigo_casa" />
+          </Key>
+          <Property Name="DNI_Administrator" Type="varchar" MaxLength="9" Nullable="false" />
+          <Property Name="codigo_casa" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="anio" Type="int" />
+          <Property Name="sueldo" Type="decimal" Precision="6" Scale="2" />
+        </EntityType>
+        <EntityType Name="administrador">
+          <Key>
+            <PropertyRef Name="DNI" />
+          </Key>
+          <Property Name="DNI" Type="varchar" MaxLength="9" Nullable="false" />
+          <Property Name="num_SS" Type="int" Nullable="false" />
+          <Property Name="titulacion" Type="varchar" MaxLength="9" />
+        </EntityType>
+        <EntityType Name="casa">
+          <Key>
+            <PropertyRef Name="codigo" />
+          </Key>
+          <Property Name="codigo" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="litoral" Type="bool" Nullable="false" />
+          <Property Name="codigo_comarca" Type="char" MaxLength="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="inscripciones_tanda_casa">
+          <Key>
+            <PropertyRef Name="carnet_niño" />
+            <PropertyRef Name="fecha_inicio" />
+          </Key>
+          <Property Name="carnet_niño" Type="int" Nullable="false" />
+          <Property Name="fecha_inicio" Type="date" Nullable="false" />
+          <Property Name="nombre_casa" Type="varchar" MaxLength="9" Nullable="false" />
+          <Property Name="numero_inscripcion" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="monitor">
+          <Key>
+            <PropertyRef Name="DNI" />
+          </Key>
+          <Property Name="DNI" Type="varchar" MaxLength="9" Nullable="false" />
+          <Property Name="fecha_nacimiento" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="monitor_tanda_casa">
+          <Key>
+            <PropertyRef Name="DNI" />
+            <PropertyRef Name="fecha_tanda" />
+          </Key>
+          <Property Name="DNI" Type="varchar" MaxLength="9" Nullable="false" />
+          <Property Name="fecha_tanda" Type="date" Nullable="false" />
+          <Property Name="codigo_casa" Type="varchar" MaxLength="3" />
+        </EntityType>
+        <EntityType Name="monitor_tareas_tandas">
+          <Key>
+            <PropertyRef Name="DNI_monitor" />
+            <PropertyRef Name="codigo_tarea" />
+            <PropertyRef Name="fecha_inicio_tanda" />
+          </Key>
+          <Property Name="DNI_monitor" Type="varchar" MaxLength="9" Nullable="false" />
+          <Property Name="codigo_tarea" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="fecha_inicio_tanda" Type="date" Nullable="false" />
+          <Property Name="dia_tarea" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="nino">
+          <Key>
+            <PropertyRef Name="carnet" />
+          </Key>
+          <Property Name="carnet" Type="int" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="apellidos" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="direccion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="sexo" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="anio_nacimiento" Type="int" Nullable="false" />
+          <Property Name="codigo_poblacion" Type="varchar" MaxLength="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="nino_emparentado">
+          <Key>
+            <PropertyRef Name="carnet_nino" />
+            <PropertyRef Name="carnet_hermano" />
+          </Key>
+          <Property Name="carnet_nino" Type="int" Nullable="false" />
+          <Property Name="carnet_hermano" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="personal">
+          <Key>
+            <PropertyRef Name="DNI" />
+          </Key>
+          <Property Name="DNI" Type="varchar" MaxLength="9" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="apellidos" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="teléfono" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="poblacion">
+          <Key>
+            <PropertyRef Name="codigo" />
+          </Key>
+          <Property Name="codigo" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tanda">
+          <Key>
+            <PropertyRef Name="fecha_inicio" />
+          </Key>
+          <Property Name="fecha_inicio" Type="date" Nullable="false" />
+          <Property Name="fecha_fin" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tareas">
+          <Key>
+            <PropertyRef Name="codigo_tareas" />
+          </Key>
+          <Property Name="codigo_tareas" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="actividad_casa_ibfk_1">
+          <End Role="actividad" Type="Self.actividad" Multiplicity="1" />
+          <End Role="actividad_casa" Type="Self.actividad_casa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="actividad">
+              <PropertyRef Name="codigo" />
+            </Principal>
+            <Dependent Role="actividad_casa">
+              <PropertyRef Name="codigo_actividad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="actividad_casa_ibfk_2">
+          <End Role="casa" Type="Self.casa" Multiplicity="1" />
+          <End Role="actividad_casa" Type="Self.actividad_casa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="casa">
+              <PropertyRef Name="codigo" />
+            </Principal>
+            <Dependent Role="actividad_casa">
+              <PropertyRef Name="codigo_casa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="administra_casa_ibfk_1">
+          <End Role="administrador" Type="Self.administrador" Multiplicity="1" />
+          <End Role="administra_casa" Type="Self.administra_casa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="administrador">
+              <PropertyRef Name="DNI" />
+            </Principal>
+            <Dependent Role="administra_casa">
+              <PropertyRef Name="DNI_Administrator" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="administra_casa_ibfk_2">
+          <End Role="casa" Type="Self.casa" Multiplicity="1" />
+          <End Role="administra_casa" Type="Self.administra_casa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="casa">
+              <PropertyRef Name="codigo" />
+            </Principal>
+            <Dependent Role="administra_casa">
+              <PropertyRef Name="codigo_casa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="administrador_ibfk_1">
+          <End Role="personal" Type="Self.personal" Multiplicity="1" />
+          <End Role="administrador" Type="Self.administrador" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="personal">
+              <PropertyRef Name="DNI" />
+            </Principal>
+            <Dependent Role="administrador">
+              <PropertyRef Name="DNI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="inscripciones_tanda_casa_ibfk_1">
+          <End Role="nino" Type="Self.nino" Multiplicity="1" />
+          <End Role="inscripciones_tanda_casa" Type="Self.inscripciones_tanda_casa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nino">
+              <PropertyRef Name="carnet" />
+            </Principal>
+            <Dependent Role="inscripciones_tanda_casa">
+              <PropertyRef Name="carnet_niño" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="inscripciones_tanda_casa_ibfk_2">
+          <End Role="tanda" Type="Self.tanda" Multiplicity="1" />
+          <End Role="inscripciones_tanda_casa" Type="Self.inscripciones_tanda_casa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tanda">
+              <PropertyRef Name="fecha_inicio" />
+            </Principal>
+            <Dependent Role="inscripciones_tanda_casa">
+              <PropertyRef Name="fecha_inicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="monitor_ibfk_1">
+          <End Role="personal" Type="Self.personal" Multiplicity="1" />
+          <End Role="monitor" Type="Self.monitor" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="personal">
+              <PropertyRef Name="DNI" />
+            </Principal>
+            <Dependent Role="monitor">
+              <PropertyRef Name="DNI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="monitor_tanda_casa_ibfk_1">
+          <End Role="monitor" Type="Self.monitor" Multiplicity="1" />
+          <End Role="monitor_tanda_casa" Type="Self.monitor_tanda_casa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="monitor">
+              <PropertyRef Name="DNI" />
+            </Principal>
+            <Dependent Role="monitor_tanda_casa">
+              <PropertyRef Name="DNI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="monitor_tanda_casa_ibfk_2">
+          <End Role="tanda" Type="Self.tanda" Multiplicity="1" />
+          <End Role="monitor_tanda_casa" Type="Self.monitor_tanda_casa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tanda">
+              <PropertyRef Name="fecha_inicio" />
+            </Principal>
+            <Dependent Role="monitor_tanda_casa">
+              <PropertyRef Name="fecha_tanda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="monitor_tareas_tandas_ibfk_1">
+          <End Role="monitor" Type="Self.monitor" Multiplicity="1" />
+          <End Role="monitor_tareas_tandas" Type="Self.monitor_tareas_tandas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="monitor">
+              <PropertyRef Name="DNI" />
+            </Principal>
+            <Dependent Role="monitor_tareas_tandas">
+              <PropertyRef Name="DNI_monitor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="monitor_tareas_tandas_ibfk_2">
+          <End Role="tareas" Type="Self.tareas" Multiplicity="1" />
+          <End Role="monitor_tareas_tandas" Type="Self.monitor_tareas_tandas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tareas">
+              <PropertyRef Name="codigo_tareas" />
+            </Principal>
+            <Dependent Role="monitor_tareas_tandas">
+              <PropertyRef Name="codigo_tarea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="monitor_tareas_tandas_ibfk_3">
+          <End Role="tanda" Type="Self.tanda" Multiplicity="1" />
+          <End Role="monitor_tareas_tandas" Type="Self.monitor_tareas_tandas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tanda">
+              <PropertyRef Name="fecha_inicio" />
+            </Principal>
+            <Dependent Role="monitor_tareas_tandas">
+              <PropertyRef Name="fecha_inicio_tanda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="nino_emparentado_ibfk_1">
+          <End Role="nino" Type="Self.nino" Multiplicity="1" />
+          <End Role="nino_emparentado" Type="Self.nino_emparentado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nino">
+              <PropertyRef Name="carnet" />
+            </Principal>
+            <Dependent Role="nino_emparentado">
+              <PropertyRef Name="carnet_nino" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="nino_emparentado_ibfk_2">
+          <End Role="nino" Type="Self.nino" Multiplicity="1" />
+          <End Role="nino_emparentado" Type="Self.nino_emparentado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nino">
+              <PropertyRef Name="carnet" />
+            </Principal>
+            <Dependent Role="nino_emparentado">
+              <PropertyRef Name="carnet_hermano" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="nino_ibfk_1">
+          <End Role="poblacion" Type="Self.poblacion" Multiplicity="1" />
+          <End Role="nino" Type="Self.nino" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="poblacion">
+              <PropertyRef Name="codigo" />
+            </Principal>
+            <Dependent Role="nino">
+              <PropertyRef Name="codigo_poblacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="coloniesModelStoreContainer">
+          <EntitySet Name="actividad" EntityType="Self.actividad" Schema="colonies" store:Type="Tables" />
+          <EntitySet Name="actividad_casa" EntityType="Self.actividad_casa" Schema="colonies" store:Type="Tables" />
+          <EntitySet Name="administra_casa" EntityType="Self.administra_casa" Schema="colonies" store:Type="Tables" />
+          <EntitySet Name="administrador" EntityType="Self.administrador" Schema="colonies" store:Type="Tables" />
+          <EntitySet Name="casa" EntityType="Self.casa" Schema="colonies" store:Type="Tables" />
+          <EntitySet Name="inscripciones_tanda_casa" EntityType="Self.inscripciones_tanda_casa" Schema="colonies" store:Type="Tables" />
+          <EntitySet Name="monitor" EntityType="Self.monitor" Schema="colonies" store:Type="Tables" />
+          <EntitySet Name="monitor_tanda_casa" EntityType="Self.monitor_tanda_casa" Schema="colonies" store:Type="Tables" />
+          <EntitySet Name="monitor_tareas_tandas" EntityType="Self.monitor_tareas_tandas" Schema="colonies" store:Type="Tables" />
+          <EntitySet Name="nino" EntityType="Self.nino" Schema="colonies" store:Type="Tables" />
+          <EntitySet Name="nino_emparentado" EntityType="Self.nino_emparentado" Schema="colonies" store:Type="Tables" />
+          <EntitySet Name="personal" EntityType="Self.personal" Schema="colonies" store:Type="Tables" />
+          <EntitySet Name="poblacion" EntityType="Self.poblacion" Schema="colonies" store:Type="Tables" />
+          <EntitySet Name="tanda" EntityType="Self.tanda" Schema="colonies" store:Type="Tables" />
+          <EntitySet Name="tareas" EntityType="Self.tareas" Schema="colonies" store:Type="Tables" />
+          <AssociationSet Name="actividad_casa_ibfk_1" Association="Self.actividad_casa_ibfk_1">
+            <End Role="actividad" EntitySet="actividad" />
+            <End Role="actividad_casa" EntitySet="actividad_casa" />
+          </AssociationSet>
+          <AssociationSet Name="actividad_casa_ibfk_2" Association="Self.actividad_casa_ibfk_2">
+            <End Role="casa" EntitySet="casa" />
+            <End Role="actividad_casa" EntitySet="actividad_casa" />
+          </AssociationSet>
+          <AssociationSet Name="administra_casa_ibfk_1" Association="Self.administra_casa_ibfk_1">
+            <End Role="administrador" EntitySet="administrador" />
+            <End Role="administra_casa" EntitySet="administra_casa" />
+          </AssociationSet>
+          <AssociationSet Name="administra_casa_ibfk_2" Association="Self.administra_casa_ibfk_2">
+            <End Role="casa" EntitySet="casa" />
+            <End Role="administra_casa" EntitySet="administra_casa" />
+          </AssociationSet>
+          <AssociationSet Name="administrador_ibfk_1" Association="Self.administrador_ibfk_1">
+            <End Role="personal" EntitySet="personal" />
+            <End Role="administrador" EntitySet="administrador" />
+          </AssociationSet>
+          <AssociationSet Name="inscripciones_tanda_casa_ibfk_1" Association="Self.inscripciones_tanda_casa_ibfk_1">
+            <End Role="nino" EntitySet="nino" />
+            <End Role="inscripciones_tanda_casa" EntitySet="inscripciones_tanda_casa" />
+          </AssociationSet>
+          <AssociationSet Name="inscripciones_tanda_casa_ibfk_2" Association="Self.inscripciones_tanda_casa_ibfk_2">
+            <End Role="tanda" EntitySet="tanda" />
+            <End Role="inscripciones_tanda_casa" EntitySet="inscripciones_tanda_casa" />
+          </AssociationSet>
+          <AssociationSet Name="monitor_ibfk_1" Association="Self.monitor_ibfk_1">
+            <End Role="personal" EntitySet="personal" />
+            <End Role="monitor" EntitySet="monitor" />
+          </AssociationSet>
+          <AssociationSet Name="monitor_tanda_casa_ibfk_1" Association="Self.monitor_tanda_casa_ibfk_1">
+            <End Role="monitor" EntitySet="monitor" />
+            <End Role="monitor_tanda_casa" EntitySet="monitor_tanda_casa" />
+          </AssociationSet>
+          <AssociationSet Name="monitor_tanda_casa_ibfk_2" Association="Self.monitor_tanda_casa_ibfk_2">
+            <End Role="tanda" EntitySet="tanda" />
+            <End Role="monitor_tanda_casa" EntitySet="monitor_tanda_casa" />
+          </AssociationSet>
+          <AssociationSet Name="monitor_tareas_tandas_ibfk_1" Association="Self.monitor_tareas_tandas_ibfk_1">
+            <End Role="monitor" EntitySet="monitor" />
+            <End Role="monitor_tareas_tandas" EntitySet="monitor_tareas_tandas" />
+          </AssociationSet>
+          <AssociationSet Name="monitor_tareas_tandas_ibfk_2" Association="Self.monitor_tareas_tandas_ibfk_2">
+            <End Role="tareas" EntitySet="tareas" />
+            <End Role="monitor_tareas_tandas" EntitySet="monitor_tareas_tandas" />
+          </AssociationSet>
+          <AssociationSet Name="monitor_tareas_tandas_ibfk_3" Association="Self.monitor_tareas_tandas_ibfk_3">
+            <End Role="tanda" EntitySet="tanda" />
+            <End Role="monitor_tareas_tandas" EntitySet="monitor_tareas_tandas" />
+          </AssociationSet>
+          <AssociationSet Name="nino_emparentado_ibfk_1" Association="Self.nino_emparentado_ibfk_1">
+            <End Role="nino" EntitySet="nino" />
+            <End Role="nino_emparentado" EntitySet="nino_emparentado" />
+          </AssociationSet>
+          <AssociationSet Name="nino_emparentado_ibfk_2" Association="Self.nino_emparentado_ibfk_2">
+            <End Role="nino" EntitySet="nino" />
+            <End Role="nino_emparentado" EntitySet="nino_emparentado" />
+          </AssociationSet>
+          <AssociationSet Name="nino_ibfk_1" Association="Self.nino_ibfk_1">
+            <End Role="poblacion" EntitySet="poblacion" />
+            <End Role="nino" EntitySet="nino" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="coloniesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="actividad">
+          <Key>
+            <PropertyRef Name="codigo" />
+          </Key>
+          <Property Name="codigo" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="actividad_casa" Relationship="Self.actividad_casa_ibfk_1" FromRole="actividad" ToRole="actividad_casa" />
+        </EntityType>
+        <EntityType Name="actividad_casa">
+          <Key>
+            <PropertyRef Name="codigo_actividad" />
+            <PropertyRef Name="codigo_casa" />
+          </Key>
+          <Property Name="codigo_actividad" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="codigo_casa" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nivel_calidad" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="actividad" Relationship="Self.actividad_casa_ibfk_1" FromRole="actividad_casa" ToRole="actividad" />
+          <NavigationProperty Name="casa" Relationship="Self.actividad_casa_ibfk_2" FromRole="actividad_casa" ToRole="casa" />
+        </EntityType>
+        <EntityType Name="administra_casa">
+          <Key>
+            <PropertyRef Name="DNI_Administrator" />
+            <PropertyRef Name="codigo_casa" />
+          </Key>
+          <Property Name="DNI_Administrator" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="codigo_casa" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="anio" Type="Int32" />
+          <Property Name="sueldo" Type="Decimal" />
+          <NavigationProperty Name="administrador" Relationship="Self.administra_casa_ibfk_1" FromRole="administra_casa" ToRole="administrador" />
+          <NavigationProperty Name="casa" Relationship="Self.administra_casa_ibfk_2" FromRole="administra_casa" ToRole="casa" />
+        </EntityType>
+        <EntityType Name="administrador">
+          <Key>
+            <PropertyRef Name="DNI" />
+          </Key>
+          <Property Name="DNI" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="num_SS" Type="Int32" Nullable="false" />
+          <Property Name="titulacion" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="administra_casa" Relationship="Self.administra_casa_ibfk_1" FromRole="administrador" ToRole="administra_casa" />
+          <NavigationProperty Name="personal" Relationship="Self.administrador_ibfk_1" FromRole="administrador" ToRole="personal" />
+        </EntityType>
+        <EntityType Name="casa">
+          <Key>
+            <PropertyRef Name="codigo" />
+          </Key>
+          <Property Name="codigo" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="litoral" Type="Boolean" Nullable="false" />
+          <Property Name="codigo_comarca" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="actividad_casa" Relationship="Self.actividad_casa_ibfk_2" FromRole="casa" ToRole="actividad_casa" />
+          <NavigationProperty Name="administra_casa" Relationship="Self.administra_casa_ibfk_2" FromRole="casa" ToRole="administra_casa" />
+        </EntityType>
+        <EntityType Name="inscripciones_tanda_casa">
+          <Key>
+            <PropertyRef Name="carnet_niño" />
+            <PropertyRef Name="fecha_inicio" />
+          </Key>
+          <Property Name="carnet_niño" Type="Int32" Nullable="false" />
+          <Property Name="fecha_inicio" Type="DateTime" Nullable="false" />
+          <Property Name="nombre_casa" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="numero_inscripcion" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="nino" Relationship="Self.inscripciones_tanda_casa_ibfk_1" FromRole="inscripciones_tanda_casa" ToRole="nino" />
+          <NavigationProperty Name="tanda" Relationship="Self.inscripciones_tanda_casa_ibfk_2" FromRole="inscripciones_tanda_casa" ToRole="tanda" />
+        </EntityType>
+        <EntityType Name="monitor">
+          <Key>
+            <PropertyRef Name="DNI" />
+          </Key>
+          <Property Name="DNI" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fecha_nacimiento" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="personal" Relationship="Self.monitor_ibfk_1" FromRole="monitor" ToRole="personal" />
+          <NavigationProperty Name="monitor_tanda_casa" Relationship="Self.monitor_tanda_casa_ibfk_1" FromRole="monitor" ToRole="monitor_tanda_casa" />
+          <NavigationProperty Name="monitor_tareas_tandas" Relationship="Self.monitor_tareas_tandas_ibfk_1" FromRole="monitor" ToRole="monitor_tareas_tandas" />
+        </EntityType>
+        <EntityType Name="monitor_tanda_casa">
+          <Key>
+            <PropertyRef Name="DNI" />
+            <PropertyRef Name="fecha_tanda" />
+          </Key>
+          <Property Name="DNI" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fecha_tanda" Type="DateTime" Nullable="false" />
+          <Property Name="codigo_casa" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="monitor" Relationship="Self.monitor_tanda_casa_ibfk_1" FromRole="monitor_tanda_casa" ToRole="monitor" />
+          <NavigationProperty Name="tanda" Relationship="Self.monitor_tanda_casa_ibfk_2" FromRole="monitor_tanda_casa" ToRole="tanda" />
+        </EntityType>
+        <EntityType Name="monitor_tareas_tandas">
+          <Key>
+            <PropertyRef Name="DNI_monitor" />
+            <PropertyRef Name="codigo_tarea" />
+            <PropertyRef Name="fecha_inicio_tanda" />
+          </Key>
+          <Property Name="DNI_monitor" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="codigo_tarea" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fecha_inicio_tanda" Type="DateTime" Nullable="false" />
+          <Property Name="dia_tarea" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="monitor" Relationship="Self.monitor_tareas_tandas_ibfk_1" FromRole="monitor_tareas_tandas" ToRole="monitor" />
+          <NavigationProperty Name="tareas" Relationship="Self.monitor_tareas_tandas_ibfk_2" FromRole="monitor_tareas_tandas" ToRole="tareas" />
+          <NavigationProperty Name="tanda" Relationship="Self.monitor_tareas_tandas_ibfk_3" FromRole="monitor_tareas_tandas" ToRole="tanda" />
+        </EntityType>
+        <EntityType Name="nino">
+          <Key>
+            <PropertyRef Name="carnet" />
+          </Key>
+          <Property Name="carnet" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sexo" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="anio_nacimiento" Type="Int32" Nullable="false" />
+          <Property Name="codigo_poblacion" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="inscripciones_tanda_casa" Relationship="Self.inscripciones_tanda_casa_ibfk_1" FromRole="nino" ToRole="inscripciones_tanda_casa" />
+          <NavigationProperty Name="poblacion" Relationship="Self.nino_ibfk_1" FromRole="nino" ToRole="poblacion" />
+          <NavigationProperty Name="nino1" Relationship="Self.nino_emparentado" FromRole="nino" ToRole="nino1" />
+          <NavigationProperty Name="nino2" Relationship="Self.nino_emparentado" FromRole="nino1" ToRole="nino" />
+        </EntityType>
+        <EntityType Name="personal">
+          <Key>
+            <PropertyRef Name="DNI" />
+          </Key>
+          <Property Name="DNI" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apellidos" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="teléfono" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="administrador" Relationship="Self.administrador_ibfk_1" FromRole="personal" ToRole="administrador" />
+          <NavigationProperty Name="monitor" Relationship="Self.monitor_ibfk_1" FromRole="personal" ToRole="monitor" />
+        </EntityType>
+        <EntityType Name="poblacion">
+          <Key>
+            <PropertyRef Name="codigo" />
+          </Key>
+          <Property Name="codigo" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="nino" Relationship="Self.nino_ibfk_1" FromRole="poblacion" ToRole="nino" />
+        </EntityType>
+        <EntityType Name="tanda">
+          <Key>
+            <PropertyRef Name="fecha_inicio" />
+          </Key>
+          <Property Name="fecha_inicio" Type="DateTime" Nullable="false" />
+          <Property Name="fecha_fin" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="inscripciones_tanda_casa" Relationship="Self.inscripciones_tanda_casa_ibfk_2" FromRole="tanda" ToRole="inscripciones_tanda_casa" />
+          <NavigationProperty Name="monitor_tanda_casa" Relationship="Self.monitor_tanda_casa_ibfk_2" FromRole="tanda" ToRole="monitor_tanda_casa" />
+          <NavigationProperty Name="monitor_tareas_tandas" Relationship="Self.monitor_tareas_tandas_ibfk_3" FromRole="tanda" ToRole="monitor_tareas_tandas" />
+        </EntityType>
+        <EntityType Name="tareas">
+          <Key>
+            <PropertyRef Name="codigo_tareas" />
+          </Key>
+          <Property Name="codigo_tareas" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="monitor_tareas_tandas" Relationship="Self.monitor_tareas_tandas_ibfk_2" FromRole="tareas" ToRole="monitor_tareas_tandas" />
+        </EntityType>
+        <Association Name="actividad_casa_ibfk_1">
+          <End Role="actividad" Type="Self.actividad" Multiplicity="1" />
+          <End Role="actividad_casa" Type="Self.actividad_casa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="actividad">
+              <PropertyRef Name="codigo" />
+            </Principal>
+            <Dependent Role="actividad_casa">
+              <PropertyRef Name="codigo_actividad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="actividad_casa_ibfk_2">
+          <End Role="casa" Type="Self.casa" Multiplicity="1" />
+          <End Role="actividad_casa" Type="Self.actividad_casa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="casa">
+              <PropertyRef Name="codigo" />
+            </Principal>
+            <Dependent Role="actividad_casa">
+              <PropertyRef Name="codigo_casa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="administra_casa_ibfk_1">
+          <End Role="administrador" Type="Self.administrador" Multiplicity="1" />
+          <End Role="administra_casa" Type="Self.administra_casa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="administrador">
+              <PropertyRef Name="DNI" />
+            </Principal>
+            <Dependent Role="administra_casa">
+              <PropertyRef Name="DNI_Administrator" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="administra_casa_ibfk_2">
+          <End Role="casa" Type="Self.casa" Multiplicity="1" />
+          <End Role="administra_casa" Type="Self.administra_casa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="casa">
+              <PropertyRef Name="codigo" />
+            </Principal>
+            <Dependent Role="administra_casa">
+              <PropertyRef Name="codigo_casa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="administrador_ibfk_1">
+          <End Role="personal" Type="Self.personal" Multiplicity="1" />
+          <End Role="administrador" Type="Self.administrador" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="personal">
+              <PropertyRef Name="DNI" />
+            </Principal>
+            <Dependent Role="administrador">
+              <PropertyRef Name="DNI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="inscripciones_tanda_casa_ibfk_1">
+          <End Role="nino" Type="Self.nino" Multiplicity="1" />
+          <End Role="inscripciones_tanda_casa" Type="Self.inscripciones_tanda_casa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nino">
+              <PropertyRef Name="carnet" />
+            </Principal>
+            <Dependent Role="inscripciones_tanda_casa">
+              <PropertyRef Name="carnet_niño" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="inscripciones_tanda_casa_ibfk_2">
+          <End Role="tanda" Type="Self.tanda" Multiplicity="1" />
+          <End Role="inscripciones_tanda_casa" Type="Self.inscripciones_tanda_casa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tanda">
+              <PropertyRef Name="fecha_inicio" />
+            </Principal>
+            <Dependent Role="inscripciones_tanda_casa">
+              <PropertyRef Name="fecha_inicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="monitor_ibfk_1">
+          <End Role="personal" Type="Self.personal" Multiplicity="1" />
+          <End Role="monitor" Type="Self.monitor" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="personal">
+              <PropertyRef Name="DNI" />
+            </Principal>
+            <Dependent Role="monitor">
+              <PropertyRef Name="DNI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="monitor_tanda_casa_ibfk_1">
+          <End Role="monitor" Type="Self.monitor" Multiplicity="1" />
+          <End Role="monitor_tanda_casa" Type="Self.monitor_tanda_casa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="monitor">
+              <PropertyRef Name="DNI" />
+            </Principal>
+            <Dependent Role="monitor_tanda_casa">
+              <PropertyRef Name="DNI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="monitor_tareas_tandas_ibfk_1">
+          <End Role="monitor" Type="Self.monitor" Multiplicity="1" />
+          <End Role="monitor_tareas_tandas" Type="Self.monitor_tareas_tandas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="monitor">
+              <PropertyRef Name="DNI" />
+            </Principal>
+            <Dependent Role="monitor_tareas_tandas">
+              <PropertyRef Name="DNI_monitor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="monitor_tanda_casa_ibfk_2">
+          <End Role="tanda" Type="Self.tanda" Multiplicity="1" />
+          <End Role="monitor_tanda_casa" Type="Self.monitor_tanda_casa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tanda">
+              <PropertyRef Name="fecha_inicio" />
+            </Principal>
+            <Dependent Role="monitor_tanda_casa">
+              <PropertyRef Name="fecha_tanda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="monitor_tareas_tandas_ibfk_2">
+          <End Role="tareas" Type="Self.tareas" Multiplicity="1" />
+          <End Role="monitor_tareas_tandas" Type="Self.monitor_tareas_tandas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tareas">
+              <PropertyRef Name="codigo_tareas" />
+            </Principal>
+            <Dependent Role="monitor_tareas_tandas">
+              <PropertyRef Name="codigo_tarea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="monitor_tareas_tandas_ibfk_3">
+          <End Role="tanda" Type="Self.tanda" Multiplicity="1" />
+          <End Role="monitor_tareas_tandas" Type="Self.monitor_tareas_tandas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tanda">
+              <PropertyRef Name="fecha_inicio" />
+            </Principal>
+            <Dependent Role="monitor_tareas_tandas">
+              <PropertyRef Name="fecha_inicio_tanda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="nino_ibfk_1">
+          <End Role="poblacion" Type="Self.poblacion" Multiplicity="1" />
+          <End Role="nino" Type="Self.nino" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="poblacion">
+              <PropertyRef Name="codigo" />
+            </Principal>
+            <Dependent Role="nino">
+              <PropertyRef Name="codigo_poblacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="nino_emparentado">
+          <End Role="nino" Type="Self.nino" Multiplicity="*" />
+          <End Role="nino1" Type="Self.nino" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="coloniesEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="actividad" EntityType="Self.actividad" />
+          <EntitySet Name="actividad_casa" EntityType="Self.actividad_casa" />
+          <EntitySet Name="administra_casa" EntityType="Self.administra_casa" />
+          <EntitySet Name="administrador" EntityType="Self.administrador" />
+          <EntitySet Name="casa" EntityType="Self.casa" />
+          <EntitySet Name="inscripciones_tanda_casa" EntityType="Self.inscripciones_tanda_casa" />
+          <EntitySet Name="monitor" EntityType="Self.monitor" />
+          <EntitySet Name="monitor_tanda_casa" EntityType="Self.monitor_tanda_casa" />
+          <EntitySet Name="monitor_tareas_tandas" EntityType="Self.monitor_tareas_tandas" />
+          <EntitySet Name="nino" EntityType="Self.nino" />
+          <EntitySet Name="personal" EntityType="Self.personal" />
+          <EntitySet Name="poblacion" EntityType="Self.poblacion" />
+          <EntitySet Name="tanda" EntityType="Self.tanda" />
+          <EntitySet Name="tareas" EntityType="Self.tareas" />
+          <AssociationSet Name="actividad_casa_ibfk_1" Association="Self.actividad_casa_ibfk_1">
+            <End Role="actividad" EntitySet="actividad" />
+            <End Role="actividad_casa" EntitySet="actividad_casa" />
+          </AssociationSet>
+          <AssociationSet Name="actividad_casa_ibfk_2" Association="Self.actividad_casa_ibfk_2">
+            <End Role="casa" EntitySet="casa" />
+            <End Role="actividad_casa" EntitySet="actividad_casa" />
+          </AssociationSet>
+          <AssociationSet Name="administra_casa_ibfk_1" Association="Self.administra_casa_ibfk_1">
+            <End Role="administrador" EntitySet="administrador" />
+            <End Role="administra_casa" EntitySet="administra_casa" />
+          </AssociationSet>
+          <AssociationSet Name="administra_casa_ibfk_2" Association="Self.administra_casa_ibfk_2">
+            <End Role="casa" EntitySet="casa" />
+            <End Role="administra_casa" EntitySet="administra_casa" />
+          </AssociationSet>
+          <AssociationSet Name="administrador_ibfk_1" Association="Self.administrador_ibfk_1">
+            <End Role="personal" EntitySet="personal" />
+            <End Role="administrador" EntitySet="administrador" />
+          </AssociationSet>
+          <AssociationSet Name="inscripciones_tanda_casa_ibfk_1" Association="Self.inscripciones_tanda_casa_ibfk_1">
+            <End Role="nino" EntitySet="nino" />
+            <End Role="inscripciones_tanda_casa" EntitySet="inscripciones_tanda_casa" />
+          </AssociationSet>
+          <AssociationSet Name="inscripciones_tanda_casa_ibfk_2" Association="Self.inscripciones_tanda_casa_ibfk_2">
+            <End Role="tanda" EntitySet="tanda" />
+            <End Role="inscripciones_tanda_casa" EntitySet="inscripciones_tanda_casa" />
+          </AssociationSet>
+          <AssociationSet Name="monitor_ibfk_1" Association="Self.monitor_ibfk_1">
+            <End Role="personal" EntitySet="personal" />
+            <End Role="monitor" EntitySet="monitor" />
+          </AssociationSet>
+          <AssociationSet Name="monitor_tanda_casa_ibfk_1" Association="Self.monitor_tanda_casa_ibfk_1">
+            <End Role="monitor" EntitySet="monitor" />
+            <End Role="monitor_tanda_casa" EntitySet="monitor_tanda_casa" />
+          </AssociationSet>
+          <AssociationSet Name="monitor_tareas_tandas_ibfk_1" Association="Self.monitor_tareas_tandas_ibfk_1">
+            <End Role="monitor" EntitySet="monitor" />
+            <End Role="monitor_tareas_tandas" EntitySet="monitor_tareas_tandas" />
+          </AssociationSet>
+          <AssociationSet Name="monitor_tanda_casa_ibfk_2" Association="Self.monitor_tanda_casa_ibfk_2">
+            <End Role="tanda" EntitySet="tanda" />
+            <End Role="monitor_tanda_casa" EntitySet="monitor_tanda_casa" />
+          </AssociationSet>
+          <AssociationSet Name="monitor_tareas_tandas_ibfk_2" Association="Self.monitor_tareas_tandas_ibfk_2">
+            <End Role="tareas" EntitySet="tareas" />
+            <End Role="monitor_tareas_tandas" EntitySet="monitor_tareas_tandas" />
+          </AssociationSet>
+          <AssociationSet Name="monitor_tareas_tandas_ibfk_3" Association="Self.monitor_tareas_tandas_ibfk_3">
+            <End Role="tanda" EntitySet="tanda" />
+            <End Role="monitor_tareas_tandas" EntitySet="monitor_tareas_tandas" />
+          </AssociationSet>
+          <AssociationSet Name="nino_ibfk_1" Association="Self.nino_ibfk_1">
+            <End Role="poblacion" EntitySet="poblacion" />
+            <End Role="nino" EntitySet="nino" />
+          </AssociationSet>
+          <AssociationSet Name="nino_emparentado" Association="Self.nino_emparentado">
+            <End Role="nino" EntitySet="nino" />
+            <End Role="nino1" EntitySet="nino" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="coloniesModelStoreContainer" CdmEntityContainer="coloniesEntities">
+          <EntitySetMapping Name="actividad">
+            <EntityTypeMapping TypeName="coloniesModel.actividad">
+              <MappingFragment StoreEntitySet="actividad">
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="actividad_casa">
+            <EntityTypeMapping TypeName="coloniesModel.actividad_casa">
+              <MappingFragment StoreEntitySet="actividad_casa">
+                <ScalarProperty Name="codigo_actividad" ColumnName="codigo_actividad" />
+                <ScalarProperty Name="codigo_casa" ColumnName="codigo_casa" />
+                <ScalarProperty Name="nivel_calidad" ColumnName="nivel_calidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="administra_casa">
+            <EntityTypeMapping TypeName="coloniesModel.administra_casa">
+              <MappingFragment StoreEntitySet="administra_casa">
+                <ScalarProperty Name="DNI_Administrator" ColumnName="DNI_Administrator" />
+                <ScalarProperty Name="codigo_casa" ColumnName="codigo_casa" />
+                <ScalarProperty Name="anio" ColumnName="anio" />
+                <ScalarProperty Name="sueldo" ColumnName="sueldo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="administrador">
+            <EntityTypeMapping TypeName="coloniesModel.administrador">
+              <MappingFragment StoreEntitySet="administrador">
+                <ScalarProperty Name="DNI" ColumnName="DNI" />
+                <ScalarProperty Name="num_SS" ColumnName="num_SS" />
+                <ScalarProperty Name="titulacion" ColumnName="titulacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="casa">
+            <EntityTypeMapping TypeName="coloniesModel.casa">
+              <MappingFragment StoreEntitySet="casa">
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="litoral" ColumnName="litoral" />
+                <ScalarProperty Name="codigo_comarca" ColumnName="codigo_comarca" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="inscripciones_tanda_casa">
+            <EntityTypeMapping TypeName="coloniesModel.inscripciones_tanda_casa">
+              <MappingFragment StoreEntitySet="inscripciones_tanda_casa">
+                <ScalarProperty Name="carnet_niño" ColumnName="carnet_niño" />
+                <ScalarProperty Name="fecha_inicio" ColumnName="fecha_inicio" />
+                <ScalarProperty Name="nombre_casa" ColumnName="nombre_casa" />
+                <ScalarProperty Name="numero_inscripcion" ColumnName="numero_inscripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="monitor">
+            <EntityTypeMapping TypeName="coloniesModel.monitor">
+              <MappingFragment StoreEntitySet="monitor">
+                <ScalarProperty Name="DNI" ColumnName="DNI" />
+                <ScalarProperty Name="fecha_nacimiento" ColumnName="fecha_nacimiento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="monitor_tanda_casa">
+            <EntityTypeMapping TypeName="coloniesModel.monitor_tanda_casa">
+              <MappingFragment StoreEntitySet="monitor_tanda_casa">
+                <ScalarProperty Name="DNI" ColumnName="DNI" />
+                <ScalarProperty Name="fecha_tanda" ColumnName="fecha_tanda" />
+                <ScalarProperty Name="codigo_casa" ColumnName="codigo_casa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="monitor_tareas_tandas">
+            <EntityTypeMapping TypeName="coloniesModel.monitor_tareas_tandas">
+              <MappingFragment StoreEntitySet="monitor_tareas_tandas">
+                <ScalarProperty Name="DNI_monitor" ColumnName="DNI_monitor" />
+                <ScalarProperty Name="codigo_tarea" ColumnName="codigo_tarea" />
+                <ScalarProperty Name="fecha_inicio_tanda" ColumnName="fecha_inicio_tanda" />
+                <ScalarProperty Name="dia_tarea" ColumnName="dia_tarea" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="nino">
+            <EntityTypeMapping TypeName="coloniesModel.nino">
+              <MappingFragment StoreEntitySet="nino">
+                <ScalarProperty Name="carnet" ColumnName="carnet" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="sexo" ColumnName="sexo" />
+                <ScalarProperty Name="anio_nacimiento" ColumnName="anio_nacimiento" />
+                <ScalarProperty Name="codigo_poblacion" ColumnName="codigo_poblacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="personal">
+            <EntityTypeMapping TypeName="coloniesModel.personal">
+              <MappingFragment StoreEntitySet="personal">
+                <ScalarProperty Name="DNI" ColumnName="DNI" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+                <ScalarProperty Name="teléfono" ColumnName="teléfono" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="poblacion">
+            <EntityTypeMapping TypeName="coloniesModel.poblacion">
+              <MappingFragment StoreEntitySet="poblacion">
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tanda">
+            <EntityTypeMapping TypeName="coloniesModel.tanda">
+              <MappingFragment StoreEntitySet="tanda">
+                <ScalarProperty Name="fecha_inicio" ColumnName="fecha_inicio" />
+                <ScalarProperty Name="fecha_fin" ColumnName="fecha_fin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tareas">
+            <EntityTypeMapping TypeName="coloniesModel.tareas">
+              <MappingFragment StoreEntitySet="tareas">
+                <ScalarProperty Name="codigo_tareas" ColumnName="codigo_tareas" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="nino_emparentado" TypeName="coloniesModel.nino_emparentado" StoreEntitySet="nino_emparentado">
+            <EndProperty Name="nino">
+              <ScalarProperty Name="carnet" ColumnName="carnet_nino" />
+            </EndProperty>
+            <EndProperty Name="nino1">
+              <ScalarProperty Name="carnet" ColumnName="carnet_hermano" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

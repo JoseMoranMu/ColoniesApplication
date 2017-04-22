@@ -101,6 +101,12 @@
     <Compile Include="Colonias.Designer.cs">
       <DependentUpon>Colonias.cs</DependentUpon>
     </Compile>
+    <Compile Include="MoniAddTareaTanda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MoniAddTareaTanda.Designer.cs">
+      <DependentUpon>MoniAddTareaTanda.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -171,6 +177,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MoniAddTareaTanda.resx">
+      <DependentUpon>MoniAddTareaTanda.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MoniForm.resx">
       <DependentUpon>MoniForm.cs</DependentUpon>

@@ -19,5 +19,11 @@ namespace ColoniesApplication
             InitializeComponent();
             cm = new ControladorMonitor();
         }
+
+        private void añadirTareaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MoniAddTareaTanda bd = new MoniAddTareaTanda(this);
+            bd.Show();
+        }
     }
 }

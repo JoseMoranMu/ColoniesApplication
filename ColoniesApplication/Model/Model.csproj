@@ -65,16 +65,6 @@
     <Compile Include="Actividad.cs" />
     <Compile Include="Administrador.cs" />
     <Compile Include="ColoniesBD.cs" />
-    <Compile Include="coloniesDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>coloniesDataSet.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="DataClasses1.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataClasses1.dbml</DependentUpon>
-    </Compile>
     <Compile Include="Monitor.cs" />
     <Compile Include="Ninio.cs" />
     <Compile Include="Personal.cs" />
@@ -87,22 +77,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="coloniesDataSet.xsc">
-      <DependentUpon>coloniesDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="coloniesDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>coloniesDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="coloniesDataSet.xss">
-      <DependentUpon>coloniesDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="DataClasses1.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>DataClasses1.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -114,11 +88,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="DataClasses1.dbml.layout">
-      <DependentUpon>DataClasses1.dbml</DependentUpon>
-    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
