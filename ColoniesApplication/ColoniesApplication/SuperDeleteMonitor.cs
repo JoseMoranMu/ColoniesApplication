@@ -19,11 +19,22 @@ namespace ColoniesApplication
             cs = new ControladorSuper();
             InitializeComponent();
             MdiParent = parent;
+            loadData();
+        }
+
+        private void loadData()
+        {
+            List<String> list = cs.getDNIMoni();
+            foreach(String s in list)
+            {
+                comboBox1.Items.Add(s);
+
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            String dni = textBox1.Text;
+            String dni = comboBox1.SelectedItem.ToString();
 
             if (cs.borrarMonitor(dni)) 
                 {

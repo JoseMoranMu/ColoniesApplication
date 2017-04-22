@@ -20,11 +20,21 @@ namespace ColoniesApplication
             ca = new ControladorAdmin();
             InitializeComponent();
             this.MdiParent = parent;
+            loadData();
+        }
+
+        private void loadData()
+        {
+            List<int> list = ca.getCarnetNinos();
+            foreach (int s in list) {
+
+                comboBox4.Items.Add(s.ToString());
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            int carnet = int.Parse(textBox1.Text);
+            int carnet = int.Parse(comboBox4.SelectedItem.ToString());
             String nombre = textBox2.Text;
             String apellido = textBox3.Text;
             String calle = textBox4.Text;
@@ -37,11 +47,12 @@ namespace ColoniesApplication
             if (ca.modificarNen(n, casa))
             {
 
-                MessageBox.Show("Niño añadido");
+                MessageBox.Show("Niño modificado");
+                this.Close();
             }
             else
             {
-                MessageBox.Show("Niño no añadido");
+                MessageBox.Show("Niño no modificado");
 
             }
         }

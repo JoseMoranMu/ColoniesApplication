@@ -34,5 +34,10 @@ namespace Controlador
         public List<String> getDNIAdmin() {
             return bd.getDNIAdmin();
         }
+
+        public List<String> getDNIMoni()
+        {
+            return bd.getDNIMoni();
+        }
     }
 }

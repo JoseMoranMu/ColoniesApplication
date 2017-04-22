@@ -20,11 +20,20 @@ namespace ColoniesApplication
             ca = new ControladorAdmin();
             InitializeComponent();
             this.MdiParent = parent;
+            loadData();
+        }
+
+        private void loadData()
+        {
+            List<int> list = ca.getCarnetNinos();
+            foreach (int a in list) {
+                comboBox3.Items.Add(a.ToString());
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            int carnet = int.Parse(textBox1.Text);
+            int carnet = int.Parse(comboBox3.SelectedItem.ToString());
             String fecha = comboBox2.SelectedItem.ToString();
             String casa = comboBox1.SelectedItem.ToString().Substring(0,3);
             int numero = int.Parse(numericUpDown1.Value.ToString());

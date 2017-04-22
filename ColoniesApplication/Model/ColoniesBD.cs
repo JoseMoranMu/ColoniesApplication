@@ -46,17 +46,61 @@ namespace Model
             return p;
         }
 
+        public List<string> getDNIMoni()
+        {
+            List<String> lista = new List<String>();
+            MySqlConnection sqlCon = new MySqlConnection("Server= localhost; Database= colonies;Uid=alumne;Pwd=alumne;");
+            sqlCon.Open();
+            String query = "Select DNI from monitor";
+            MySqlCommand mysqlCmd = new MySqlCommand(query, sqlCon);
+            MySqlDataReader sqlReader = mysqlCmd.ExecuteReader();
+            while (sqlReader.Read())
+            {
+                lista.Add((String)sqlReader.GetValue(0));
+            }
+            return lista;
+        }
         public List<string> getDNIAdmin()
         {
             List<String> lista = new List<String>();
             MySqlConnection sqlCon = new MySqlConnection("Server= localhost; Database= colonies;Uid=alumne;Pwd=alumne;");
             sqlCon.Open();
-            String query = "Select DNI from personal";
+            String query = "Select DNI from administrador";
             MySqlCommand mysqlCmd = new MySqlCommand(query, sqlCon);
             MySqlDataReader sqlReader = mysqlCmd.ExecuteReader();
             while (sqlReader.Read())
             {
                 lista.Add((String) sqlReader.GetValue(0));
+            }
+            return lista;
+        }
+        public List<int> getCarnetNinos()
+        {
+            List<int> lista = new List<int>();
+            MySqlConnection sqlCon = new MySqlConnection("Server= localhost; Database= colonies;Uid=alumne;Pwd=alumne;");
+            sqlCon.Open();
+            String query = "Select carnet from nino";
+            MySqlCommand mysqlCmd = new MySqlCommand(query, sqlCon);
+            MySqlDataReader sqlReader = mysqlCmd.ExecuteReader();
+            while (sqlReader.Read())
+            {
+                lista.Add((int)sqlReader.GetValue(0));
+            }
+            return lista;
+        }
+        public List<String> getCarnetFechaNinos()
+        {
+            List<String> lista = new List<String>();
+            MySqlConnection sqlCon = new MySqlConnection("Server= localhost; Database= colonies;Uid=alumne;Pwd=alumne;");
+            sqlCon.Open();
+            String query = "Select carnet_niño, fecha_inicio from inscripciones_tanda_casa";
+            MySqlCommand mysqlCmd = new MySqlCommand(query, sqlCon);
+            MySqlDataReader sqlReader = mysqlCmd.ExecuteReader();
+            while (sqlReader.Read())
+            {
+                int n = (int)sqlReader.GetValue(0);
+                DateTime s = (DateTime)sqlReader.GetValue(1);
+                lista.Add(n.ToString()+"/"+ s.Date.ToString("yyyy-MM-dd"));
             }
             return lista;
         }
@@ -323,7 +367,7 @@ namespace Model
             return flag;
         }        
     
-
+        
         public bool modificarNen(Ninio n, string codpoblacion)
         {
             Boolean flag = false;
